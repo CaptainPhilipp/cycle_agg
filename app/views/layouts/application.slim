@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+html
+= render 'layouts/application/head'
+body
+
+  div#page.container
+    = yield
+    = debug(params) if Rails.env.development?
+
+= console if Rails.env.development?
