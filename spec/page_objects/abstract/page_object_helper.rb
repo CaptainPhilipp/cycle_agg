@@ -2,12 +2,12 @@ module PageObjectHelper
   private
 
   def define_property(name, selector, meth)
-    define_reader(name, selector, meth)
+    define_basic_reader(name, selector, meth)
     define_writer(name, selector)
   end
 
   def define_all_readers(type, name, selector, meth)
-    define_reader(name, selector, meth)
+    define_basic_reader(name, selector, meth)
     define_object_readers(type, name, selector)
   end
 
@@ -16,7 +16,7 @@ module PageObjectHelper
     define_element(type, name, selector)
   end
 
-  def define_reader(name, selector, meth = :value)
+  def define_basic_reader(name, selector, meth = :value)
     define_method(name) { @browser.find(selector).send meth }
   end
 
@@ -37,6 +37,10 @@ module PageObjectHelper
     define_method("#{un_check}_#{name}_checkbox") do
       @browser.send un_check, @browser.find(selector)[:id]
     end
+  end
+
+  def define_clicker(name, selector)
+    define_method(name) { @browser.find(selector).click }
   end
 
   def discover_selector(arguments, prefix = nil)

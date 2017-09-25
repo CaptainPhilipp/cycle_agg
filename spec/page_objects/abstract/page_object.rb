@@ -21,8 +21,8 @@ module PageObject
     false
   end
 
-  def self.included(cls)
-    cls.extend ClassMethods
+  def self.included(klass)
+    klass.extend ClassMethods
   end
 
   module ClassMethods
@@ -40,14 +40,19 @@ module PageObject
       selector = discover_selector(arguments, 'input')
 
       define_object_readers type, name, selector
+      define_clicker(name, selector)
     end
 
+    # Submit button
+    # submit('Some text') #=> button(:submit, type: :submit, value: 'Some text')
+    # submit(:sea_otter, 'Some text') #=> button(:sea_otter, type: :submit, value: 'Some text')
     def submit(*arguments)
       options = arguments.last.is_a?(Hash) ? arguments.last : {}
       name    = arguments.first.is_a?(Symbol) ? arguments.first : :submit
       value   = arguments.find { |a| a.is_a?(String) }
-      options.merge(value: value) if value
-      button(name, options.merge(type: :submit))
+      options[:value] = value if value
+      options[:type] = :submit
+      button(name, options)
     end
 
     def link(name, *arguments)
@@ -56,6 +61,7 @@ module PageObject
 
       define_object_readers type, name, selector
       define_method("#{name}_text") { @browser.find(selector).text }
+      define_clicker(name, selector)
     end
 
     def span_element(name, *arguments)
@@ -83,12 +89,13 @@ module PageObject
 
     def file_field(name, *arguments)
       type = :file_field
-      selector = discover_selector(arguments, 'input')
+      selector = discover_selector(arguments)
 
       define_all_readers type, name, selector, :value
 
       define_method "attach_file_to_#{name}" do |filepath|
-        @browser.attach_file selector, filepath
+        name_for_capybara_attaching = arguments.last[:name]
+        @browser.attach_file name_for_capybara_attaching, filepath
       end
     end
 
@@ -121,7 +128,7 @@ module PageObject
       define_checker name, selector, :check
       define_checker name, selector, :uncheck
 
-      define_method("#{name}_checkbox_is_checked?") { @browser.find(selector)['checked'] }
+      define_method("#{name}_сhecked?") { @browser.find(selector)['checked'] }
     end
 
     def table(name, *arguments)
@@ -137,7 +144,7 @@ module PageObject
 
       define_object_readers type, name, selector
 
-      define_method("#{name}_form_has_errors?") do
+      define_method("#{name}_#{type}_has_errors?") do
         @browser.within(:css, selector) do
           @browser.has_selector? ERROR_CSS_CLASS
         end
