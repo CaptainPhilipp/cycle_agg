@@ -4,9 +4,9 @@ class PricelistsController < ApplicationController
   end
 
   def create
-    @pricelist = Pricelist.create(pricelist_params)
+    @pricelist = Pricelist.new(pricelist_params)
 
-    if @pricelist.valid?
+    if @pricelist.save
       redirect_to @pricelist
     else
       render :new
