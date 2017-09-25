@@ -5,12 +5,13 @@ require_relative 'page_object_helper'
 module PageObject
   ERROR_CSS_CLASS = '.alert-error'.freeze
 
-  def initialize(capybara_page_obj)
+  def initialize(capybara_page_obj, path = nil)
     @browser = capybara_page_obj
+    @path = path
   end
 
-  def visit(path)
-    @browser.visit path
+  def visit
+    @browser.visit @path
     self
   end
 
@@ -87,6 +88,7 @@ module PageObject
       define_all_readers type, name, selector, :value
     end
 
+    # For attaching files, you need to define `:name` attribute
     def file_field(name, *arguments)
       type = :file_field
       selector = discover_selector(arguments)
