@@ -5,7 +5,7 @@ RSpec.describe PricelistsController, type: :controller do
     it 'returns http success'
   end
 
-  describe 'GET #create' do
-    it 'returns http success'
+  describe 'POST #create' do
+    it 'initializes publication creation'
   end
 end
