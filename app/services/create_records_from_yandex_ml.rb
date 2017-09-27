@@ -1,7 +1,7 @@
 # parse data from Yandex markup language file, and creates Publication for it
 class CreateRecordsFromYandexMl
   def initialize(yml_file_adress)
-    parse(yml_file_adress)
+    @yml_file_adress = yml_file_adress
   end
 
   def call
@@ -9,23 +9,23 @@ class CreateRecordsFromYandexMl
   end
 
   def data
-    @extracted_data ||= @data.to_a # execute lazy
-  ensure
-    @data = nil
-    @file.close
+    @data ||= parse_yandex_ml_file
   end
 
   private
 
-  def parse(yml_file_adress)
-    @file = open yml_file_adress
+  def parse_yandex_ml_file
+    @file = open @yml_file_adress
     yml   = YandexML::File.new(@file)
 
     shop_data = extract_shop_data(yml.shop)
-    @data = build_data(yml.offers, shop_data)
+
+    merge_multiple_hashes(shop_data, yml.offers).to_a
+  ensure
+    @file.close
   end
 
-  def build_data(offers, shop_data)
+  def merge_multiple_hashes(shop_data, offers)
     offers.map do |offer|
       extract_offer_data(offer).merge(shop_data)
     end
