@@ -48,7 +48,6 @@ module PageObject
       define_clicker name, selector
     end
 
-    # Submit button
     # submit('Some text')         == button(:submit, type: :submit, value: 'Some text')
     # submit(:other, 'Some text') == button(:other, type: :submit, value: 'Some text')
     #
@@ -138,7 +137,9 @@ module PageObject
     # %name%_selector        # => xpath selector
     # %name%_button          # => element
     #
-    # TODO: other meta methods description
+    # %name% = value              # => select with value or text
+    # select_nth_option_in_%name% # => select option by position
+    # %name%_number_of_arguments  # => number of selection variants
     #
     def select_list(name, *arguments) # rubocop:disable Metrics/MethodLength, Metric/AbcSize
       type = :select_list

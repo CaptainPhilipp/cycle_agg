@@ -8,7 +8,7 @@ feature 'User sees publications list' do
     visit root_path
 
     within '#page' do
-      expect(page).to have_content title_from_ynadex_ml
+      expect(page).to have_content yandex_ml_offer.title
     end
   end
 end
