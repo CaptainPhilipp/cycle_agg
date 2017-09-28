@@ -7,6 +7,7 @@ class Pricelist < ApplicationRecord
   private
 
   def create_publication_from_yandex_ml
-    CreateRecordsFromYandexMl.new(attachment.file.file).call
+    hashes = HashFromYandexMl.new.call(attachment.file.file)
+    Publication.create(hashes)
   end
 end

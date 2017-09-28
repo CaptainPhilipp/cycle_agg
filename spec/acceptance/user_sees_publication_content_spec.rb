@@ -15,7 +15,7 @@ feature 'User sees publication content' do
 
     scenario 'user sees main content of publication' do
       within '#page' do
-        expect(page).to have_text yandex_ml_offer.title
+        expect(page).to have_text    yandex_ml_offer.title
         expect(page).to have_content yandex_ml_offer.description
       end
     end
@@ -23,7 +23,7 @@ feature 'User sees publication content' do
     scenario 'user sees advanced data of publication' do
       within '#page' do
         expect(page).to have_content "Источник: #{yandex_ml_shop_title}"
-        expect(page).to have_link yandex_ml_shop_title, href: yandex_ml_offer.url
+        expect(page).to have_link    yandex_ml_shop_title, href: yandex_ml_offer.url
         expect(page).to have_content yandex_ml_offer.available ? 'Доступен' : 'Не доступен'
       end
     end
