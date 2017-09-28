@@ -9,9 +9,7 @@ class CreatePublications < ActiveRecord::Migration[5.1]
       t.string :shop_url
 
       t.integer :offer_id
-      t.integer :offer_id
       t.string :url
-      t.string :title
       t.string :picture
       t.boolean :available
 

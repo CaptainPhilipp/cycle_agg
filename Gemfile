@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'less-rails'
 gem 'slim'
+gem 'slim-rails'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 
@@ -41,6 +42,7 @@ gem 'yandex_ml'
 
 group :test do
   gem 'capybara'
+  gem 'launchy'
 end
 
 group :development, :test do

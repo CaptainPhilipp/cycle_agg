@@ -1,0 +1,11 @@
+.
+  .
+    h1 = @publication.title
+  .
+    p = @publication.description
+    p
+      | Источник: 
+      = link_to "#{@publication.shop_title} #{@publication.offer_id}", @publication.url
+
+    p = image_tag @publication.picture
+    p = "#{@publication.available? ? 'Доступен' : 'Не доступен'} для заказа"

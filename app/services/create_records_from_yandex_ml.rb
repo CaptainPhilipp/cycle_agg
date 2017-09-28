@@ -45,6 +45,7 @@ class CreateRecordsFromYandexMl
       url: offer.url,
       title: offer.name,
       picture: offer.picture,
+      description: offer.description,
       available: offer.available
     }
   end
