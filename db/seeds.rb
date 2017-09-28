@@ -1,17 +1,19 @@
 class Seed
   attr_reader :records, :relations
 
-  def self.transaction(*models)
-    models.first.transaction do
-      models.each(&:delete_all)
-
-      yield new
-    end
-  end
-
   def initialize
     @records = {}
     @relations = {}
+  end
+
+  def transaction
+    ApplicationRecord.transaction do
+      yield
+    end
+  end
+
+  def clear(*models)
+    models.each(&:delete_all)
   end
 
   def write(record, parent_pks = nil)
@@ -157,10 +159,13 @@ def pks(struct, key_name = :parent_titles)
   struct.send key_name if struct.respond_to? key_name
 end
 
-Seed.transaction Category, ChildrenParent do |seed|
+seed = Seed.new
+
+seed.transaction do
+  seed.clear Category, ChildrenParent
+
   categories.each do |struct|
-    record = Category.create hash_from(struct)
-    seed.write record, pks(struct)
+    seed.write Category.create(hash_from(struct)), pks(struct)
   end
 
   seed.each_relation do |children, parent|
