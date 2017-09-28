@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 html
-= render 'layouts/application/head'
-body
+  = render 'layouts/application/head'
 
-  div#page.container
-    = yield
+  body
+    = render 'layouts/application/menu'
 
-    div.clearfix
+    div#page.container
+      = yield
 
-    - if Rails.env.development?
-      br
-      = debug(params)
-      = console
+      div.clearfix
+
+      - if Rails.env.development?
+        br
+        = debug(params)
+        = console
