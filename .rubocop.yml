@@ -12,6 +12,12 @@
 Metrics/LineLength:
   Max: 95
   IgnoredPatterns: ['\A\s*\#']
+  Exclude:
+    - 'db/schema.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
 
 # Offense count: 5
 Style/Documentation:

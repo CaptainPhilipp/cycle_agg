@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_170_925_172_706) do
+ActiveRecord::Schema.define(version: 20_170_928_173_431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
+
+  create_table 'categories', force: :cascade do |t|
+    t.string 'ru_title'
+    t.string 'en_title'
+    t.string 'depth'
+    t.string 'short_title'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
+  create_table 'children_parents', force: :cascade do |t|
+    t.string 'children_type', null: false
+    t.bigint 'children_id', null: false
+    t.string 'parent_type', null: false
+    t.bigint 'parent_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[children_type children_id], name: 'index_children_parents_on_children_type_and_children_id'
+    t.index %w[parent_type parent_id], name: 'index_children_parents_on_parent_type_and_parent_id'
+  end
 
   create_table 'pricelists', force: :cascade do |t|
     t.string 'attachment'
