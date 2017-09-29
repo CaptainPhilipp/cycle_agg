@@ -3,7 +3,9 @@ require_relative 'acceptance_helper'
 feature 'User sees publication content' do
   include_context 'yandex_ml_example'
 
-  let!(:pricelist) { Pricelist.create attachment: File.new(yandex_ml_example_path) }
+  let!(:pricelist) do
+    Sidekiq::Testing.inline! { Pricelist.create attachment: File.new(yandex_ml_example_path) }
+  end
 
   scenario 'When user sees all publications, he can open page with publication' do
     visit root_path
