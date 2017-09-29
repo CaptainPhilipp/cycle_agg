@@ -2,7 +2,7 @@ require 'rails_helper'
 require "#{Rails.root}/app/services/hash_from_yandex_ml"
 
 RSpec.describe HashFromYandexMl do
-  include_context 'yandex_ml_example_path'
+  include_context 'yandex_ml_example'
 
   describe '#call' do
     let(:data) { HashFromYandexMl.new.call(yandex_ml_example_path) }
