@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20_170_928_173_431) do
   create_table 'categories', force: :cascade do |t|
     t.string 'ru_title'
     t.string 'en_title'
-    t.string 'depth'
+    t.integer 'depth'
     t.string 'short_title'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false

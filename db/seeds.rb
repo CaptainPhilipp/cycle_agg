@@ -1,55 +1,6 @@
-class Seed
-  attr_reader :records, :relations
+require_relative '../app/seeds/seed_service'
 
-  def initialize
-    @records = {}
-    @relations = {}
-  end
-
-  def transaction
-    ApplicationRecord.transaction do
-      yield
-    end
-  end
-
-  def clear(*models)
-    models.each(&:delete_all)
-  end
-
-  def write(record, parent_pks = nil)
-    pk = pk_for record
-
-    records[pk]   = record
-    relations[pk] = parent_pks if parent_pks
-  end
-
-  def each_relation
-    relations.each do |children_pk, parent_pks|
-      children = by_pk(children_pk)
-
-      parent_pks.each do |parent_pk|
-        parent = by_pk(parent_pk)
-        yield children, parent
-      end
-    end
-  end
-
-  private
-
-  def pk_for(record)
-    record.en_title
-  end
-
-  def by_pk(pk)
-    records[pk]
-  end
-end
-
-Group      = Struct.new :depth, :en_title, :ru_title
-Section    = Struct.new :depth, :en_title, :ru_title, :parent_titles
-Subsection = Struct.new :depth, :en_title, :ru_title, :parent_titles
-
-# rubocop:disable Metrics/LineLength, Layout/EmptyLines
+# rubocop:disable Layout/EmptyLines, Metrics/LineLength
 # rubocop:disable Layout/SpaceInsideArrayPercentLiteral, Layout/SpaceInsidePercentLiteralDelimiters
 
 categories = [
@@ -148,27 +99,4 @@ categories = [
   Subsection.new(2, 'Derailer guards', 'Защита переключателя', %w[MTB Guard])
 ]
 
-# rubocop:enable Metrics/LineLength, Layout/EmptyLines
-# rubocop:enable Layout/SpaceInsideArrayPercentLiteral, Layout/SpaceInsidePercentLiteralDelimiters
-
-def hash_from(struct)
-  struct.to_h.select { |key, _| %i[ru_title en_title depth].include? key }
-end
-
-def pks(struct, key_name = :parent_titles)
-  struct.send key_name if struct.respond_to? key_name
-end
-
-seed = Seed.new
-
-seed.transaction do
-  seed.clear Category, ChildrenParent
-
-  categories.each do |struct|
-    seed.write Category.create(hash_from(struct)), pks(struct)
-  end
-
-  seed.each_relation do |children, parent|
-    ChildrenParent.create children: children, parent: parent
-  end
-end
+SeedService.new.call(categories)

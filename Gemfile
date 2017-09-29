@@ -42,7 +42,9 @@ gem 'yandex_ml'
 
 group :test do
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'launchy'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do

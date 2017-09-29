@@ -18,6 +18,7 @@ Metrics/LineLength:
 Metrics/BlockLength:
   Exclude:
     - 'db/schema.rb'
+    - 'spec/**/*'
 
 # Offense count: 5
 Style/Documentation:

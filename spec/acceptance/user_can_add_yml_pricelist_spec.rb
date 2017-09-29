@@ -2,7 +2,7 @@ require_relative 'acceptance_helper'
 require_relative '../page_objects/new_pricelist_page'
 
 feature 'User can upload YML pricelist' do
-  include_context 'yandex_ml_example_path'
+  include_context 'yandex_ml_example'
 
   let!(:page_object) { NewPricelistPage.new(page, new_pricelist_path).visit }
 

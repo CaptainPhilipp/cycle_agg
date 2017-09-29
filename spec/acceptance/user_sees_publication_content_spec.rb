@@ -1,7 +1,7 @@
 require_relative 'acceptance_helper'
 
 feature 'User sees publication content' do
-  include_context 'yandex_ml_example_path'
+  include_context 'yandex_ml_example'
 
   let!(:pricelist) { Pricelist.create attachment: File.new(yandex_ml_example_path) }
 
