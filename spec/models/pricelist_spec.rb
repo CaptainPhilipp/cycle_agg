@@ -7,9 +7,13 @@ RSpec.describe Pricelist, type: :model do
     it 'initializes Publications creation' do
       pricelist = Pricelist.new
       pricelist.attachment = File.new(filepath)
+      expected_hashes = HashFromYandexMl.new.call(filepath)
 
-      expect(Publication).to receive(:create)
-      pricelist.save
+      expect(Publication).to receive(:create).with(expected_hashes)
+
+      Sidekiq::Testing.inline! do
+        pricelist.save
+      end
     end
   end
 end

@@ -13,6 +13,10 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'sidekiq/testing'
+
+Sidekiq::Testing.fake!
+
 RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
   # rspec-expectations config goes here. You can use an alternate
