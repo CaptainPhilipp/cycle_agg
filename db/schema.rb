@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_170_928_173_431) do
+ActiveRecord::Schema.define(version: 20_170_930_135_046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20_170_928_173_431) do
     t.string 'url'
     t.string 'picture'
     t.boolean 'available'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
+  create_table 'sport_groups', force: :cascade do |t|
+    t.string 'ru_title'
+    t.string 'en_title'
+    t.string 'short_title'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
