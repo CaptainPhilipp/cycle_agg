@@ -9,10 +9,11 @@ class SeedService
 
   def call(categories)
     ApplicationRecord.transaction do
-      delete_all Category, ChildrenParent
+      delete_all SportGroup, Category, ChildrenParent
 
       categories.each do |struct|
-        seed.write Category.create(hash_from(struct)), pks(struct)
+        record = create_record_from_struct(struct)
+        seed.write record, pks(struct)
       end
 
       seed.each_relation do |children, parent|
@@ -27,8 +28,24 @@ class SeedService
     models.each(&:delete_all)
   end
 
-  def hash_from(struct)
-    struct.to_h.select { |key, _| %i[ru_title en_title depth].include? key }
+  def create_record_from_struct(struct)
+    model = model_by struct.depth
+    hash  = hash_from struct, for_model: model
+    model.create hash
+  end
+
+  def model_by(depth)
+    { 0 => SportGroup, 1 => Category, 2 => Category }[depth]
+  end
+
+  def hash_from(struct, for_model:)
+    struct.to_h.select { |key, _| permit_attributes(for_model).include? key }
+  end
+
+  def permit_attributes(model)
+    { SportGroup => %i[ru_title en_title],
+      Category   => %i[ru_title en_title depth]
+    }.fetch(model) # rubocop:disable Layout/MultilineHashBraceLayout
   end
 
   def pks(struct, key_name = :parent_titles)
