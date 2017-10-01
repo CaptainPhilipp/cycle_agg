@@ -1,0 +1,7 @@
+- if @pricelist.errors.messages[:attachment].any?
+  = @pricelist.errors.messages[:attachment].each do |e|
+    p = e
+
+= form_for @pricelist do |f|
+  = f.file_field :attachment
+  = f.submit 'Upload pricelist'

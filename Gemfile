@@ -28,9 +28,26 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'less-rails'
+gem 'redis'
+gem 'sidekiq'
+gem 'slim'
+gem 'slim-rails'
+gem 'therubyracer'
+gem 'twitter-bootstrap-rails'
+
+gem 'carrierwave'
+gem 'yandex_ml'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :test do
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'launchy'
+  gem 'shoulda-matchers'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
