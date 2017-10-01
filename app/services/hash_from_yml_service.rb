@@ -1,5 +1,5 @@
 # parse data from Yandex markup language file, and creates Publication for it
-class HashFromYandexMl
+class HashFromYMLService
   def call(yml_file_adress)
     @yml_file_adress = yml_file_adress
     parse_yandex_ml_file

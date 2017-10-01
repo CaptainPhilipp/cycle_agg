@@ -1,11 +1,11 @@
 require 'rails_helper'
-require "#{Rails.root}/app/services/hash_from_yandex_ml"
+require "#{Rails.root}/app/services/hash_from_yml_service"
 
-RSpec.describe HashFromYandexMl do
+RSpec.describe HashFromYMLService do
   include_context 'yandex_ml_example'
 
   describe '#call' do
-    let(:data) { HashFromYandexMl.new.call(yandex_ml_example_path) }
+    let(:data) { HashFromYMLService.call(yandex_ml_example_path) }
     let(:first_data) { data.first }
 
     it 'creates an Array of Hash' do
