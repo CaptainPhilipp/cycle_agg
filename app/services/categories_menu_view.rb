@@ -34,23 +34,19 @@ class CategoriesMenuView
   end
 
   def indexed_sections
-    @indexed_sections ||= IndexedCollection.new with_depth 1
+    @indexed_sections ||= IndexedCollection.new grouped_by_depth[1]
   end
 
   def indexed_subsections
-    @indexed_subsections ||= IndexedCollection.new with_depth 2
+    @indexed_subsections ||= IndexedCollection.new grouped_by_depth[2]
   end
 
   def indexed_relations
     @indexed_relations ||= IndexedRelationsCollection.new relations, fk: :parent_id
   end
 
-  def with_depth(depth)
-    collection.select { |c| c.depth == depth }
-  end
-
-  def collection
-    @colletion ||= @raw_collection.order(:depth).to_a
+  def grouped_by_depth
+    @colletion ||= @raw_collection.to_a.group_by(:depth)
   end
 
   def relations
