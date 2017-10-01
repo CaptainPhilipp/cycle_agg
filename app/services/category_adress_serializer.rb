@@ -9,6 +9,11 @@ class CategoryAdressSerializer
     @string = string
   end
 
+  def ids
+    raise ArgumentError unless type == :id
+    values
+  end
+
   def values
     @identificators ||=
       case type

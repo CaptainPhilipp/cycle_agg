@@ -4,36 +4,51 @@ class WhereParentsQuery
     @childs_class = klass
   end
 
-  def call(parents_array)
-    @parents = parents_array
-
-    build_query
+  # records: [record1, record2, record3]
+  # ids:     { Type1: [1, 2], Type2: [3] }
+  def call(parents)
+    @parents = parents
+    if parents.is_a? Hash
+      build_query(subqueries_by_hash, parents_count_in_hash)
+    elsif parents.is_a? Array
+      build_query(subqueries_by_records, parents.size)
+    end
   end
 
   private
 
   attr_reader :childs_class, :parents
 
-  def build_query
-    query_for_any_types
+  def build_query(subqueries, parents_count)
+    inject_orqueries(subqueries)
       .group(:id)
-      .having('count(children_parents.parent_id) = ?', parents.size)
+      .having('count(children_parents.parent_id) = ?', parents_count)
   end
 
-  def query_for_any_types
-    queries_for_types.inject { |accumulated_query, query| accumulated_query.or query }
+  def parents_count_in_hash
+    parents.values.inject(0) { |m, ids| m + ids.size }
   end
 
-  def queries_for_types
-    parent_ids_by_class.to_a.inject [] do |queries, class_and_ids|
-      parent_class, parent_ids = class_and_ids
+  def inject_orqueries(queries)
+    queries.inject { |summarized_query, query| summarized_query.or(query) }
+  end
 
-      queries << query_for(parent_type: parent_class.to_s, parent_id: parent_ids)
+  def subqueries_by_hash
+    parents.to_a.map do |type_ids|
+      type, ids = type_ids
+      query_for(parent_type: type, parent_id: ids)
     end
   end
 
-  def parent_ids_by_class
-    @parents.group_by(&:class).transform_values { |parents| parents.map(&:id) }
+  def subqueries_by_records
+    grouped_by_class.to_a.inject [] do |queries, klass_ids|
+      klass, ids = klass_ids
+      queries << query_for(parent_type: klass.to_s, parent_id: ids)
+    end
+  end
+
+  def grouped_by_class
+    parents.group_by(&:class).transform_values { |parents| parents.map(&:id) }
   end
 
   def query_for(conditions_hash)
