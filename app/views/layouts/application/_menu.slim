@@ -2,14 +2,14 @@ ul#menu
   li
     li = link_to 'Домой', root_path
   li
-    - SportGroup.includes_tree.each do |group|
+    - categories_menu_view.groups.each do |group|
       li
         = menu_link_for(group)
         ul
-          - group.sections.each do |section|
+          - categories_menu_view.sections_for(group).each do |section|
             li
-              = menu_link_for(section)
+              = menu_link_for(group, section)
               ul
-                - section.subsections.each do |subsection|
+                - categories_menu_view.subsections_for(group, section).each do |subsection|
                   li
-                    = menu_link_for(subsection)
+                    = menu_link_for(group, section, subsection)
