@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "#{Rails.root}/app/services/hash_from_yandex_ml"
+require "#{Rails.root}/app/services/hash_from_yml_service"
 
 RSpec.describe HashFromYMLService do
   include_context 'yandex_ml_example'
