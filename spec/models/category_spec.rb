@@ -5,6 +5,12 @@ RSpec.describe Category, type: :model do
   include_context 'HasManyChildsPolymorphic'
   include_context 'HasShortTitle'
 
+  it 'should have_many children_associations' do
+    should have_many(:parent_associations)
+      .class_name('ChildrenParent')
+      .dependent(:destroy)
+  end
+
   context 'scope' do
     it 'sections' do
       expect(Category.sections.all? { |c| c.depth == 1 }).to be true
