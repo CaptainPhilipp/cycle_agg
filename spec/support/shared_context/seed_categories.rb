@@ -17,7 +17,7 @@ RSpec.shared_context 'seed categories' do
 
   let!(:seed) { SeedService.new.call seed_category_structs }
 
-  let(:group_mtb)  { SportGroup.all.first }
+  let(:group_mtb)  { SportGroup.first }
   let(:group_road) { SportGroup.all.last }
 
   let(:group_mtb_sections)  { Category.sections }
@@ -28,4 +28,7 @@ RSpec.shared_context 'seed categories' do
 
   let(:subsections_of_mtb_framesets)  { Category.subsections.first(2) }
   let(:subsections_of_road_framesets) { Category.subsections.first }
+
+  let(:subsection_rockrings) { Category.subsections.last }
+  let(:mtb_frameset_rockrings) { [group_mtb, section_frameset, subsection_rockrings] }
 end
