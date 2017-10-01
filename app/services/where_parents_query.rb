@@ -4,8 +4,8 @@ class WhereParentsQuery
     @childs_class = klass
   end
 
-  def call(*parents)
-    @parents = parents
+  def call(parents_array)
+    @parents = parents_array
 
     build_query
   end

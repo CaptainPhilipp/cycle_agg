@@ -27,15 +27,15 @@ describe 'HasManyParents concern' do
     end
 
     it 'children have chosen parents' do
-      expect(where_parents.call(parent1, parent2, parent3)).to match_array [children1]
+      expect(where_parents.call([parent1])).to match_array [children1, children2, children3]
 
-      expect(where_parents.call(parent1, parent2)).to match_array [children1, children2]
+      expect(where_parents.call([parent1, parent2])).to match_array [children1, children2]
 
-      expect(where_parents.call(parent1)).to match_array [children1, children2, children3]
+      expect(where_parents.call([parent1, parent2, parent3])).to match_array [children1]
     end
 
     it 'children have chosen parents when parent has many classes' do
-      expect(where_parents.call(parent1, alien_parent)).to match_array [children3]
+      expect(where_parents.call([parent1, alien_parent])).to match_array [children3]
     end
   end
 end
