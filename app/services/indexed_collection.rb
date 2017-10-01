@@ -1,11 +1,11 @@
 # gives access to records by primary keys
 class IndexedCollection
-  attr_reader :records, :pk
+  attr_reader :records, :pk_name
 
   def initialize(records, pk: :id)
     raise ArgumentError if records.nil? || records.empty?
     @records = records
-    @pk = pk
+    @pk_name = pk
   end
 
   def by_pks(pks)
@@ -29,6 +29,6 @@ class IndexedCollection
   end
 
   def pk_of(record)
-    record.send pk
+    record.send pk_name
   end
 end

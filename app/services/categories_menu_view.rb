@@ -30,7 +30,7 @@ class CategoriesMenuView
   end
 
   def child_ids(parent)
-    indexed_relations.by_fk(parent.id, :parent_id).map(&:children_id)
+    indexed_relations.by_fk(parent.id).map(&:children_id)
   end
 
   def indexed_sections
@@ -42,7 +42,7 @@ class CategoriesMenuView
   end
 
   def indexed_relations
-    @indexed_relations ||= IndexedRelationsCollection.new relations, fk_names: [:parent_id]
+    @indexed_relations ||= IndexedRelationsCollection.new relations, fk: :parent_id
   end
 
   def with_depth(depth)
