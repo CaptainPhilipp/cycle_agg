@@ -1,1 +1,7 @@
-= render @publications
+= render 'parameters/menu'
+
+- if @publications.any?
+  = render @publications
+
+- else
+  = render 'empty'

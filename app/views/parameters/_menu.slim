@@ -1,0 +1,14 @@
+#parameters-menu
+  div.head
+    = t :parameters
+
+  / = form_tag categories_path do
+  div.body
+    - if @parameters
+      = render @parameters
+
+    - else
+      p style="color: red"= 'Нет данных'
+      p
+
+    = submit_tag t(:show), class: 'btn submit'
