@@ -1,0 +1,9 @@
+p = parameter.ru_title
+
+div.values
+  / - values = parameter.values_where_parents(chosen_categories)
+  / - if values.any?
+  /   = render parameter.present_type, values: values, parameter: parameter
+
+  / - else
+  p = '-'

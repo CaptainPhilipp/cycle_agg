@@ -1,15 +1,16 @@
-require_relative '../app/seeds/seed_service'
+require_relative '../app/seeds/seed'
 
 # rubocop:disable Layout/EmptyLines, Metrics/LineLength
 # rubocop:disable Layout/SpaceInsideArrayPercentLiteral, Layout/SpaceInsidePercentLiteralDelimiters
 
+groups = [
+  Group.new('MTB',  'МТБ'),
+  Group.new('ROAD', 'Шоссе'),
+  Group.new('BMX',  'BMX'),
+  Group.new('FUN',  'Прогулочные')
+]
+
 categories = [
-  Group.new(0, 'MTB',  'МТБ'),
-  Group.new(0, 'ROAD', 'Шоссе'),
-  Group.new(0, 'BMX',  'BMX'),
-  Group.new(0, 'FUN',  'Прогулочные'),
-
-
   Section.new(1,    'Frame and framesets', 'Рамы и фреймсеты',          %w[MTB ROAD BMX FUN]),
 
   Subsection.new(2, 'Framesets',           'Фреймсет',                  %w[MTB ROAD BMX FUN] << 'Frame and framesets'),
@@ -99,4 +100,13 @@ categories = [
   Subsection.new(2, 'Derailer guards', 'Защита переключателя', %w[MTB Guard])
 ]
 
-SeedService.new.call(categories)
+parameters = [
+  ParameterStruct.new('Frame type', 'Тип рамы', ['MTB', 'Frame and framesets', 'Frames']),
+  ParameterStruct.new('Material',   'Материал', ['MTB', 'Frame and framesets', 'Frames'])
+]
+
+Seed.call do |seed|
+  seed.write(SportGroup, groups)
+  seed.write(Category, categories)
+  seed.write(Parameter, parameters)
+end

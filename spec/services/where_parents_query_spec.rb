@@ -27,7 +27,7 @@ describe 'HasManyParents concern' do
     end
 
     context 'with array of records' do
-      fit 'children have chosen parents' do
+      it 'children have chosen parents' do
         expect(where_parents.call(Category: [parent1.id]))
           .to match_array [children1, children2, children3]
 

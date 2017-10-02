@@ -32,11 +32,11 @@ class CategoryAdressSerializer
   end
 
   class << self
-    def to_ids(*categories)
+    def to_ids(categories)
       categories.map(&:id).join(DELIMETER)
     end
 
-    def to_short_titles(*categories)
+    def to_short_titles(categories)
       categories.map(&:short_title).join(DELIMETER)
     end
   end

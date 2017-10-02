@@ -2,7 +2,7 @@ ul#menu
   li
     li = link_to 'Домой', root_path
   li
-    - categories_menu_view.groups.each do |group|
+    - SportGroup.all.each do |group|
       li
         = menu_link_for(group)
         ul

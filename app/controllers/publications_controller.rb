@@ -2,7 +2,8 @@ class PublicationsController < ApplicationController
   def index
     @publications = Publication.all
 
-    @parameters = Parameter.where_parents(parents_ids)
+    @parent_ids = parent_ids
+    @parameters = parent_ids.empty? ? Parameter.all : Parameter.where_parents(parent_ids)
   end
 
   def show
@@ -11,11 +12,15 @@ class PublicationsController < ApplicationController
 
   private
 
-  def parents_ids
-    @parents_ids ||= { SportGroup: params[:group], Category: categories_ids }
+  def parent_ids
+    return @parent_ids if @parent_ids
+    @parent_ids = {}
+    return @parent_ids unless params[:group] || params[:categories]
+    @parent_ids[:SportGroup] = [params[:group].to_i] if params[:group]
+    @parent_ids.merge! Category: categories_ids if params[:categories]
   end
 
   def categories_ids
-    CategoryAdressSerializer.new(params[:categories]).values
+    CategoryAdressSerializer.new(params[:categories]).ids
   end
 end

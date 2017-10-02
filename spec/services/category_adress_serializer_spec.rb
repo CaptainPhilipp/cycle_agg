@@ -6,8 +6,8 @@ describe CategoryAdressSerializer do
 
   let(:service) { CategoryAdressSerializer }
 
-  let(:serialized_ids) { service.to_ids(*mtb_frameset_rockrings) }
-  let(:serialized_short_titles) { service.to_short_titles(*mtb_frameset_rockrings) }
+  let(:serialized_ids) { service.to_ids(mtb_frameset_rockrings) }
+  let(:serialized_short_titles) { service.to_short_titles(mtb_frameset_rockrings) }
 
   context 'singleton method' do
     describe '.to_ids' do
