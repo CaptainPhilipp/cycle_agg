@@ -1,27 +1,32 @@
 # Presents categories in right structure, with relations. Optimized.
 class CategoriesMenuView
-  def initialize(collection, groups:)
-    @root_categories = groups
+  def initialize(collection)
     @raw_collection = collection
   end
 
-  def groups
-    @root_categories
-  end
-
   def sections_for(*parents)
-    for_parents(parents, indexed_sections)
+    for_parents(parents, 1)
   end
 
   def subsections_for(*parents)
-    for_parents(parents, indexed_subsections)
+    for_parents(parents, 2)
   end
 
   private
 
-  def for_parents(parents, indexed_collection)
+  def for_parents(parents, depth)
     ids = parents.size > 1 ? child_ids_intersection(parents) : child_ids(parents.first)
-    indexed_collection.by_pks ids
+
+    indexed_collection(depth).by_pks(ids)
+  end
+
+  def indexed_collection(depth)
+    @collections ||= {}
+    @collections[depth] ||= IndexedCollection.new grouped_by_depth[depth]
+  end
+
+  def grouped_by_depth
+    @grouped_by_depth ||= @raw_collection.to_a.group_by(&:depth)
   end
 
   def child_ids_intersection(parents)
@@ -30,27 +35,11 @@ class CategoriesMenuView
   end
 
   def child_ids(parent)
-    indexed_relations.by_fk(parent.id, :parent_id).map(&:children_id)
-  end
-
-  def indexed_sections
-    @indexed_sections ||= IndexedCollection.new with_depth 1
-  end
-
-  def indexed_subsections
-    @indexed_subsections ||= IndexedCollection.new with_depth 2
+    indexed_relations.by_fk(parent.id).map(&:children_id)
   end
 
   def indexed_relations
-    @indexed_relations ||= IndexedRelationsCollection.new relations, fk_names: [:parent_id]
-  end
-
-  def with_depth(depth)
-    collection.select { |c| c.depth == depth }
-  end
-
-  def collection
-    @colletion ||= @raw_collection.order(:depth).to_a
+    @indexed_relations ||= IndexedRelationsCollection.new relations, fk: :parent_id
   end
 
   def relations

@@ -1,15 +1,15 @@
-# gives access to relation records by any foreign_keys
+# gives access to relation records by foreign_key
 class IndexedRelationsCollection
-  attr_reader :relations, :fk_names
+  attr_reader :relations, :fk_name
 
-  def initialize(relations, fk_names:)
+  def initialize(relations, fk:)
     raise ArgumentError unless relations.respond_to? :each
-    @fk_names = fk_names
     @relations = relations
+    @fk_name = fk
   end
 
-  def by_fk(value, fk_name = fk_names.first)
-    indexed_relations[fk_name][value]
+  def by_fk(value)
+    indexed_relations[value]
   end
 
   private
@@ -18,16 +18,17 @@ class IndexedRelationsCollection
     @indexed_relations ||= index_relations
   end
 
-  def index_relations(hash = {})
-    fk_names.each { |key| hash[key] = {} } # little optimize
-
+  def index_relations
+    hash = {}
     relations.each do |relation|
-      fk_names.each do |fk_name|
-        pk_value = relation.send fk_name
-        hash[fk_name][pk_value] ||= []
-        hash[fk_name][pk_value] << relation
-      end
+      fk = fk_of relation
+      hash[fk] ||= []
+      hash[fk] << relation
     end
     hash
+  end
+
+  def fk_of(relation)
+    relation.send fk_name
   end
 end

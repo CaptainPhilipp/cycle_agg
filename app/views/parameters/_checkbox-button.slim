@@ -1,0 +1,10 @@
+div.btn-group data-toggle="buttons" style="width: 100%"
+  - values.each do |value|
+    - keys = [parameter.id, value.id]
+    label.btn.btn-default.btn-sm class="#{'active' if is_checked?(keys)}" style="width: #{86.0 / values.count}%"
+      = check_box_tag get_key_name(keys), true, is_checked?(keys), name: get_key_name(keys)
+      = value.try(:title) || value
+  - keys = [parameter.id, 0]
+  label.btn.btn-default.btn-sm class="#{'active' if is_checked?(keys)}" style="width: 14%; color: gray;"
+    = check_box_tag get_key_name(keys), true, is_checked?(keys), name: get_key_name(keys)
+    = '-'

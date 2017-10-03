@@ -1,0 +1,30 @@
+- range = values.first
+
+- if range.scope < 8
+  = render 'checkbox-button', values: (range.from..range.upto).to_a, parameter: parameter
+
+- else
+  .clearfix
+    - keys = [parameter.id, range.id]
+    - chosen_value = chosen_value(keys, range.from)
+
+    . style="float: left; width: 30%;"
+      = range.from
+
+    - unless chosen_value == range.from
+      . style="float: left; width: 40%; text-align: center;"
+        = chosen_value(keys, nil)
+
+    . style="float: right; width: 30%; text-align: right;"
+      = range.upto
+
+  . style="width: 90%; float: left; vertical-align: center"
+    - title = get_key_name(keys)
+
+    = range_field title, :value, value: chosen_value,
+        in: (range.from..range.upto), step: range.step
+
+  . style="width: 10%; float: left; text-align: center"
+    . = check_box_tag get_key_name(keys), true, is_checked?(keys)
+
+div.clearfix

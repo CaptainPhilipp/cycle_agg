@@ -1,11 +1,9 @@
-require "#{Rails.root}/app/seeds/seed_service"
+require "#{Rails.root}/app/seeds/seed"
 
 RSpec.shared_context 'seed categories' do
+  let(:seed_group_structs) { [Group.new('MTB', 'МТБ'), Group.new('ROAD', 'Шоссе')] }
   let(:seed_category_structs) do
     [
-      Group.new(0, 'MTB',  'МТБ'),
-      Group.new(0, 'ROAD', 'Шоссе'),
-
       Section.new(1, 'Frameset', 'Рамы и фреймсеты',   %w[MTB ROAD]),
       Subsection.new(2, 'Forks', 'Вилки',              %w[MTB ROAD] << 'Frameset'),
       Subsection.new(2, 'Suspensions', 'Амортизаторы', %w[MTB]      << 'Frameset'),
@@ -15,9 +13,16 @@ RSpec.shared_context 'seed categories' do
     ]
   end
 
-  let!(:seed) { SeedService.new.call seed_category_structs }
+  let(:seed) { Seed.new }
 
-  let(:group_mtb)  { SportGroup.all.first }
+  let!(:seed!) do
+    seed.call do
+      seed.write SportGroup, seed_group_structs
+      seed.write Category, seed_category_structs
+    end
+  end
+
+  let(:group_mtb)  { SportGroup.first }
   let(:group_road) { SportGroup.all.last }
 
   let(:group_mtb_sections)  { Category.sections }
@@ -28,4 +33,7 @@ RSpec.shared_context 'seed categories' do
 
   let(:subsections_of_mtb_framesets)  { Category.subsections.first(2) }
   let(:subsections_of_road_framesets) { Category.subsections.first }
+
+  let(:subsection_rockrings) { Category.subsections.last }
+  let(:mtb_frameset_rockrings) { [group_mtb, section_frameset, subsection_rockrings] }
 end
