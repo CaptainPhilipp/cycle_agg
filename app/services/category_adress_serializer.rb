@@ -10,7 +10,7 @@ class CategoryAdressSerializer
   end
 
   def ids
-    raise ArgumentError unless type == :id
+    raise ArgumentError, 'Identificators string does not contains ids' unless type == :id
     values
   end
 

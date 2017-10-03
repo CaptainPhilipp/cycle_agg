@@ -9,7 +9,7 @@ class IndexedCollection
   end
 
   def by_pks(pks)
-    pks.map { |pk| by_pk(pk) }.compact
+    indexed_records.values_at(*pks).compact
   end
 
   def by_pk(pk)
