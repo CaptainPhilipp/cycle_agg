@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PublicationsController < ApplicationController
   def index
     @publications = Publication.all
@@ -12,12 +14,10 @@ class PublicationsController < ApplicationController
   private
 
   def parent_ids
-    return @parent_ids if @parent_ids
-    @parent_ids = {}
-    return @parent_ids unless params[:group] || params[:categories]
-
-    @parent_ids[:SportGroup] = group_id     if params[:group]
-    @parent_ids[:Category] = categories_ids if params[:categories]
+    @parent_ids ||= {}.tap do |parent_ids|
+      parent_ids[:SportGroup] = group_id     if params[:group]
+      parent_ids[:Category] = categories_ids if params[:categories]
+    end
   end
 
   def group_id

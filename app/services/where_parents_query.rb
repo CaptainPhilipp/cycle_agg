@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # AR query, that returns childs, having all (not any) of concrete parents
 class WhereParentsQuery
   def initialize(klass)
@@ -36,8 +38,8 @@ class WhereParentsQuery
   def subqueries_by_hash
     parents.to_a.map do |type_ids|
       type, ids = type_ids
-      query_for(parent_type: type, parent_id: ids)
-    end
+      query_for(parent_type: type, parent_id: ids) if ids&.any?
+    end.compact
   end
 
   def subqueries_by_records
