@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # gives access to relation records by foreign_key
 class IndexedRelationsCollection
   attr_reader :relations, :fk_name

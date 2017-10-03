@@ -24,3 +24,7 @@ Metrics/BlockLength:
 Style/Documentation:
   Include:
     - 'app/services/**/*'
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'spec/**/*'

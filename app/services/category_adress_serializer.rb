@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 #
 # Serializes as Singleton and Deserializes as Object
 class CategoryAdressSerializer
-  DELIMETER = ':'.freeze
+  DELIMETER = ':'
   IDS_PATTERN    = /\A[\d#{DELIMETER}]*[^A-z]\z/
   TITLES_PATTERN = /\A[A-z#{DELIMETER}\-]*\z/
 

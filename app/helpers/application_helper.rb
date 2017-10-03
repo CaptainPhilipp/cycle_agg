@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def menu_link_for(group, *categories)
     titled = categories.empty? ? group : categories.last

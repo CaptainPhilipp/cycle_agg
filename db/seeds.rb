@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../app/seeds/seed'
 
 # rubocop:disable Layout/EmptyLines, Metrics/LineLength

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePublications < ActiveRecord::Migration[5.1]
   def change # rubocop:disable Metrics/MethodLength
     create_table :publications do |t|
