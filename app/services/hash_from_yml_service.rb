@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # parse data from Yandex markup language file, and creates Publication for it
 class HashFromYMLService
   def call(yml_file_adress)

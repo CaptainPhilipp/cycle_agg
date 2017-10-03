@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Pricelist < ApplicationRecord
   mount_uploader :attachment, PricelistUploader
   validates :attachment, empty: false

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # knows only pk method of record
 class RelatedCollection
   attr_reader :records, :relations

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'structs'
 require_relative 'related_collection'
 

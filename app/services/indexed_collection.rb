@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # gives access to records by primary keys
 class IndexedCollection
   attr_reader :records, :pk_name

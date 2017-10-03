@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Presents categories in right structure, with relations. Optimized.
 class CategoriesMenuView
   def initialize(collection)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PricelistsController < ApplicationController
   def new
     @pricelist = Pricelist.new
