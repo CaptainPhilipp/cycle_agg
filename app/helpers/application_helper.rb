@@ -2,11 +2,25 @@
 
 module ApplicationHelper
   def menu_link_for(group, *categories)
-    titled = categories.empty? ? group : categories.last
-    link_to titled.ru_title, category_path(group: group, categories: categories.last)
+    category = categories.last
+    titled = [group, *categories].last
+
+    link_to titled.ru_title, category_path(sport_group: pkey(group), category: pkey(category))
   end
 
-  def categories_menu_view
-    @categories_menu_view ||= CategoriesMenuView.new Category.all
+  def pkey(record)
+    record&.short_title
+  end
+
+  def sections_menu_view
+    @sections_menu_view ||= MenuView.new(@indexed_sections, @indexed_relations)
+  end
+
+  def subsections_menu_view
+    @subsections_menu_view ||= MenuView.new(@indexed_categories, @indexed_relations)
+  end
+
+  def values_menu_view
+    @parameters_menu_view ||= MenuView.new(@indexed_values, @indexed_relations)
   end
 end

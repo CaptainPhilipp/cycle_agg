@@ -50,7 +50,7 @@ class WhereParentsQuery
   end
 
   def grouped_by_class
-    parents.group_by(&:class).transform_values { |parents| parents.map(&:id) }
+    parents.group_by(&:class).transform_values { |parents| parents.compact.map(&:id) }
   end
 
   def query_for(conditions_hash)

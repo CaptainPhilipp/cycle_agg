@@ -3,8 +3,7 @@
 class PublicationsController < ApplicationController
   def index
     @publications = Publication.all
-
-    @parameters = parent_ids.empty? ? Parameter.all : Parameter.where_parents(parent_ids)
+    @parameters = Parameter.where_parents current_sport_group, current_category
   end
 
   def show
@@ -13,18 +12,19 @@ class PublicationsController < ApplicationController
 
   private
 
-  def parent_ids
-    @parent_ids ||= {}.tap do |parent_ids|
-      parent_ids[:SportGroup] = group_id     if params[:group]
-      parent_ids[:Category] = categories_ids if params[:categories]
-    end
+  def current_sport_group
+    @current_sport_group ||= @indexed_sport_groups.by_key(short_title: params[:sport_group])
   end
 
-  def group_id
-    [params[:group].to_i]
+  def current_category
+    @current_category ||= @indexed_categories.by_key(short_title: params[:category])
   end
 
-  def categories_ids
-    CategoryAdressSerializer.new(params[:categories]).ids
+  def load_relations
+    @indexed_relations =
+      IndexedCollection.new(
+        ChildrenParent.where(parent_type: %w[SportGroup Category],
+                             children_type: %w[Category Value])
+      )
   end
 end
