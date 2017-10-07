@@ -5,11 +5,7 @@ module ApplicationHelper
     category = categories.last
     titled = [group, *categories].last
 
-    link_to titled.ru_title, category_path(sport_group: pkey(group), category: pkey(category))
-  end
-
-  def pkey(record)
-    record&.id
+    link_to titled.ru_title, category_path(group, category)
   end
 
   def sport_groups
@@ -17,13 +13,11 @@ module ApplicationHelper
   end
 
   def sections_menu_view
-    @sections_menu_view ||=
-      MenuView.new(@indexed_sections, @indexed_relations)
+    @sections_menu_view ||= MenuView.new(@indexed_sections, @indexed_relations)
   end
 
   def subsections_menu_view
-    @subsections_menu_view ||=
-      MenuView.new(@indexed_subsections, @indexed_relations)
+    @subsections_menu_view ||= MenuView.new(@indexed_subsections, @indexed_relations)
   end
 
   def values_menu_view
