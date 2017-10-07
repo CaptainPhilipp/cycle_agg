@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
 # gives access to records by foreign or primary keys
-class IndexedCollection
+class IndexedCollection < Delegator
   attr_reader :collection
 
   def __getobj__
     @collection
-  end
-
-  def each(&block)
-    @collection.each(&block)
-  end
-
-  def first
-    @collection.first
   end
 
   def initialize(collection)

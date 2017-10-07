@@ -9,15 +9,21 @@ module ApplicationHelper
   end
 
   def pkey(record)
-    record&.short_title
+    record&.id
+  end
+
+  def sport_groups
+    @sport_groups
   end
 
   def sections_menu_view
-    @sections_menu_view ||= MenuView.new(@indexed_sections, @indexed_relations)
+    @sections_menu_view ||=
+      MenuView.new(@indexed_sections, @indexed_relations)
   end
 
   def subsections_menu_view
-    @subsections_menu_view ||= MenuView.new(@indexed_categories, @indexed_relations)
+    @subsections_menu_view ||=
+      MenuView.new(@indexed_subsections, @indexed_relations)
   end
 
   def values_menu_view

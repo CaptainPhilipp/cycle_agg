@@ -10,6 +10,7 @@ class WhereParentsQuery
   # ids:     { Type1: [1, 2], Type2: [3] }
   def call(parents)
     @parents = parents
+    return childs_class.none if parents.empty?
     if parents.is_a? Hash
       build_query(subqueries_by_hash, parents_count_in_hash)
     elsif parents.is_a? Array

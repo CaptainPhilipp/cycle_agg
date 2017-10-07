@@ -7,7 +7,7 @@ def add_parents_to(children, *parents)
   ChildrenParent.create tuples
 end
 
-describe 'HasManyParents concern' do
+describe WhereParentsQuery do
   let(:where_parents) { WhereParentsQuery.new(Category) }
 
   let(:parent1) { Category.create en_title: 'Parent 1' }
