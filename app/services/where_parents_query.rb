@@ -11,11 +11,14 @@ class WhereParentsQuery
   def call(parents)
     @parents = parents
     return childs_class.none if parents.empty?
+
     if parents.is_a? Hash
       build_query(subqueries_by_hash, parents_count_in_hash)
     elsif parents.is_a? Array
       build_query(subqueries_by_records, parents.size)
     end
+  ensure
+    @parents = nil
   end
 
   private
