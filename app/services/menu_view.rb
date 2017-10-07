@@ -12,7 +12,7 @@ class MenuView
     parents.compact!
     raise ArgumentError, 'Given array of records is empty' if parents.empty?
     ids = common_child_ids_of(parents)
-    indexed_childrens.collection_by_key(id: ids)
+    indexed_childrens.by_key(id: ids)
   end
 
   private
@@ -28,9 +28,9 @@ class MenuView
 
   def child_ids(parent)
     indexed_relations
-      .collection_by_keys(parent_id: parent.id,
-                          parent_type: parent.class.to_s,
-                          children_type: childs_type)
+      .by_keys(parent_id: parent.id,
+               parent_type: parent.class.to_s,
+               children_type: childs_type)
       .compact
       .map(&:children_id)
   end

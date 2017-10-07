@@ -13,27 +13,19 @@ class IndexedCollection < Delegator
     @indexed_collections = {}
   end
 
-  # one_by_keys(id: 1, foo: 1) # => object1_foo1
-  # Only one value for every key!
-  def one_by_keys(conditions)
-    finded = collection_by_keys(conditions) || []
-    raise TooManyResults if finded.size > 1
-    finded.first
-  end
-
-  # collection_by_keys(foo: 1, bar: 1) # => [object1_foo1_bar1, object2_foo1_bar1]
-  # Only one value for every key!
-  def collection_by_keys(conditions)
+  # by_keys(foo: 1, bar: 1) # => [object1_foo1_bar1, object2_foo1_bar1]
+  # Only one value for every key - in other case, you will receive empty result
+  def by_keys(conditions)
     if conditions.size > 1
-      find_by_multiple_keys(conditions) || []
+      find_by_multiple_conditions(conditions) || []
     else
-      find_by_one_key(conditions.first) || []
+      find_by_one_condition(conditions.first) || []
     end
   end
 
-  # collection_by_key(id: [1, 2]) # => [object1, object2]
+  # by_key(id: [1, 2]) # => [object1, object2]
   # Only one key, but any count of values
-  def collection_by_key(conditions)
+  def by_key(conditions)
     raise TooManyKeys if conditions.size > 1
     key, value = conditions.first
     indexed_by_one(key).values_at(*value).compact.map(&:first)
@@ -43,11 +35,11 @@ class IndexedCollection < Delegator
 
   attr_reader :indexed_collections
 
-  def find_by_multiple_keys(conditions)
+  def find_by_multiple_conditions(conditions)
     indexed_by_multiple_keys(conditions.keys)[conditions.values]
   end
 
-  def find_by_one_key(key, value)
+  def find_by_one_condition(key, value)
     indexed_by_one(key)[value]
   end
 
@@ -59,13 +51,6 @@ class IndexedCollection < Delegator
 
   def indexed_by_one(key)
     indexed_collections[key] ||= collection.group_by(&key)
-  end
-
-  # Exception for methods, that returns only one result by primary key
-  class TooManyResults < RuntimeError
-    def message
-      'There are more than one object with current key. Use another key or method'
-    end
   end
 
   # Exception for methods, that returns only one result by primary key
