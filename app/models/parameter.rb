@@ -3,7 +3,7 @@
 class Parameter < ApplicationRecord
   include HasManyParentsPolymorphic
 
-  def self.where_parents(parents_array)
-    WhereParentsQuery.new(self).call(parents_array)
+  def self.where_parents(parents)
+    WhereParentsQuery.new(self).call(parents)
   end
 end

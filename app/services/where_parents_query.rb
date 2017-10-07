@@ -10,11 +10,15 @@ class WhereParentsQuery
   # ids:     { Type1: [1, 2], Type2: [3] }
   def call(parents)
     @parents = parents
+    return childs_class.none if parents.empty?
+
     if parents.is_a? Hash
       build_query(subqueries_by_hash, parents_count_in_hash)
     elsif parents.is_a? Array
       build_query(subqueries_by_records, parents.size)
     end
+  ensure
+    @parents = nil
   end
 
   private
@@ -50,7 +54,7 @@ class WhereParentsQuery
   end
 
   def grouped_by_class
-    parents.group_by(&:class).transform_values { |parents| parents.map(&:id) }
+    parents.group_by(&:class).transform_values { |parents| parents.compact.map(&:id) }
   end
 
   def query_for(conditions_hash)

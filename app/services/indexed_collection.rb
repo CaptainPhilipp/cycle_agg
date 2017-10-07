@@ -1,36 +1,77 @@
 # frozen_string_literal: true
 
-# gives access to records by primary keys
-class IndexedCollection
-  attr_reader :records, :pk_name
+# gives access to records by foreign or primary keys
+class IndexedCollection < Delegator
+  attr_reader :collection
 
-  def initialize(records, pk: :id)
-    raise ArgumentError if records.nil? || records.empty?
-    @records = records
-    @pk_name = pk
+  def __getobj__
+    @collection
   end
 
-  def by_pks(pks)
-    indexed_records.values_at(*pks).compact
+  def initialize(collection)
+    @collection = collection
+    @indexed_collections = {}
   end
 
-  def by_pk(pk)
-    indexed_records[pk]
+  # one_by_keys(id: 1, foo: 1) # => object1_foo1
+  # Only one value for every key!
+  def one_by_keys(conditions)
+    finded = collection_by_keys(conditions) || []
+    raise TooManyResults if finded.size > 1
+    finded.first
+  end
+
+  # collection_by_keys(foo: 1, bar: 1) # => [object1_foo1_bar1, object2_foo1_bar1]
+  # Only one value for every key!
+  def collection_by_keys(conditions)
+    if conditions.size > 1
+      find_by_multiple_keys(conditions) || []
+    else
+      find_by_one_key(conditions.first) || []
+    end
+  end
+
+  # collection_by_key(id: [1, 2]) # => [object1, object2]
+  # Only one key, but any count of values
+  def collection_by_key(conditions)
+    raise TooManyKeys if conditions.size > 1
+    key, value = conditions.first
+    indexed_by_one(key).values_at(*value).compact.map(&:first)
   end
 
   private
 
-  def indexed_records
-    @indexed_records ||= index_records
+  attr_reader :indexed_collections
+
+  def find_by_multiple_keys(conditions)
+    indexed_by_multiple_keys(conditions.keys)[conditions.values]
   end
 
-  def index_records
-    hash = {}
-    records.each { |record| hash[pk_of record] = record }
-    hash
+  def find_by_one_key(key, value)
+    indexed_by_one(key)[value]
   end
 
-  def pk_of(record)
-    record.send pk_name
+  def indexed_by_multiple_keys(keys)
+    indexed_collections[keys] ||= collection.group_by do |object|
+      keys.map { |key| object.send key }
+    end
+  end
+
+  def indexed_by_one(key)
+    indexed_collections[key] ||= collection.group_by(&key)
+  end
+
+  # Exception for methods, that returns only one result by primary key
+  class TooManyResults < RuntimeError
+    def message
+      'There are more than one object with current key. Use another key or method'
+    end
+  end
+
+  # Exception for methods, that returns only one result by primary key
+  class TooManyKeys < RuntimeError
+    def message
+      'There are more than one object with current key. Use another key or method'
+    end
   end
 end
