@@ -14,7 +14,7 @@ RSpec.describe 'MenuView' do
     end
   end
 
-  describe '#subsections_for(parents)' do
+  describe '#show_subshow_sections_for(parents)' do
     let(:indexed_categories) { IndexedCollection.new(Category.all) }
     it 'shows all subsections of parents' do
       expect(view.for_parents(group_mtb, section_frameset))

@@ -28,9 +28,9 @@ class MenuView
 
   def child_ids(parent)
     indexed_relations
-      .by_keys(parent_id: parent.id,
-               parent_type: parent.class.to_s,
-               children_type: childs_type)
+      .by_keys(children_type: childs_type,
+               parent_id:   parent.id,
+               parent_type: parent.class.to_s)
       .compact
       .map(&:children_id)
   end

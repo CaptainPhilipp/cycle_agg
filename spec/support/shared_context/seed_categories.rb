@@ -29,11 +29,12 @@ RSpec.shared_context 'seed categories' do
   let(:group_road_sections) { Category.sections.first }
 
   let(:section_frameset) { Category.sections.first }
-  let(:section_guard)    { Category.sections.first }
+  let(:section_guard)    { Category.sections.last }
 
   let(:subsections_of_mtb_framesets)  { Category.subsections.first(2) }
   let(:subsections_of_road_framesets) { Category.subsections.first }
 
+  let(:subsection_forks)     { Category.subsections.first }
   let(:subsection_rockrings) { Category.subsections.last }
   let(:mtb_frameset_rockrings) { [group_mtb, section_frameset, subsection_rockrings] }
 end

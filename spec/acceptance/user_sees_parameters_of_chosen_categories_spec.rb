@@ -1,9 +1,10 @@
 require_relative 'acceptance_helper'
 
-feature 'User sees categories menu' do
+feature 'User sees parameters of chosen categories' do
   include_context 'seed categories'
+
   let(:seed_parameter_structs) do
-    [ParameterStruct.new('Diameter', 'Диаметр', %w[MTB Guard Rockrings])]
+    [ParameterStruct.new('Diameter', 'Диаметр', 'ListValue', %w[MTB Guard Rockrings])]
   end
 
   let!(:seed_parameters) do
@@ -14,7 +15,7 @@ feature 'User sees categories menu' do
 
   before { visit root_path }
 
-  scenario 'When user opens category, he sees parameters of this category' do
+  scenario 'When user opens category, he sees values of this category' do
     within '#menu' do
       click_link subsection_rockrings.ru_title
     end
@@ -22,7 +23,7 @@ feature 'User sees categories menu' do
     expect(page).to have_content seed_parameter_structs.first.ru_title
   end
 
-  scenario 'When user opens category, he didn`t see parameters of another category' do
+  scenario 'When user opens category, he didn`t see values of another category' do
     within '#menu' do
       click_link subsections_of_mtb_framesets.last.ru_title
     end

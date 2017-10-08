@@ -26,7 +26,7 @@ class IndexedCollection < Delegator
   # by_key(id: [1, 2]) # => [object1, object2]
   # Only one key, but any count of values
   def by_key(conditions)
-    raise TooManyKeys if conditions.size > 1
+    raise ArgumentError, 'Only one "key => value" argument required!' if conditions.size > 1
     key, value = conditions.first
     indexed_by_one(key).values_at(*value).compact.map(&:first)
   end
@@ -36,7 +36,8 @@ class IndexedCollection < Delegator
   attr_reader :indexed_collections
 
   def find_by_multiple_conditions(conditions)
-    indexed_by_multiple_keys(conditions.keys)[conditions.values]
+    keys, values = conditions.to_a.sort_by(&:first).transpose
+    indexed_by_multiple_keys(keys)[values]
   end
 
   def find_by_one_condition(key, value)
@@ -51,12 +52,5 @@ class IndexedCollection < Delegator
 
   def indexed_by_one(key)
     indexed_collections[key] ||= collection.group_by(&key)
-  end
-
-  # Exception for methods, that returns only one result by primary key
-  class TooManyKeys < RuntimeError
-    def message
-      'There are more than one object with current key. Use another key or method'
-    end
   end
 end

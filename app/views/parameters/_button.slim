@@ -1,0 +1,13 @@
+div.btn-group data-toggle="buttons" style="width: 100%"
+
+  - values.each do |value|
+    - is_active = checked?(parameter, value) && 'active'
+
+    label.btn.btn-default.btn-sm class="#{is_active}" style="width: #{86.0 / values.size}%"
+      = check_box_tag :value, value.id, is_active, name: values_name(parameter)
+      = value.ru_title
+
+  - is_active = checked?(parameter) && 'active'
+  label.btn.btn-default.btn-sm class="#{is_active}" style="width: 14%; color: gray;"
+    = check_box_tag :value, '', is_active, name: values_name(parameter)
+    = '-'

@@ -1,9 +1,11 @@
 p = parameter.ru_title
 
 div.values
-  / - values = parameter.values_where_parents(chosen_categories)
-  / - if values.any?
-  /   = render parameter.present_type, values: values, parameter: parameter
+  - values = show_values_for(parameter)
 
-  / - else
-  p = '-'
+  - if values.any?
+    - present_type = ValuesPresentTypeByType.(parameter, values, :ru)
+    = render "parameters/#{present_type}", values: values, parameter: parameter
+
+  - else
+    p = '-'
