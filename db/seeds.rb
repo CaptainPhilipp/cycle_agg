@@ -105,12 +105,12 @@ categories = [
 parameters = []
 list_values = []
 
-parameters << ParameterStruct.new('Frame type',       'Тип рамы',   ['MTB', 'Frame and framesets', 'Frames'])
+parameters << ParameterStruct.new('Frame type',       'Тип рамы',   'ListValue', ['MTB', 'Frame and framesets', 'Frames'])
 list_values << ListValueStruct.new('Hardtail',        'Хардтейл',   ['MTB', 'Frame and framesets', 'Frames', 'Frame type'])
 list_values << ListValueStruct.new('Full suspension', 'Двухподвес', ['MTB', 'Frame and framesets', 'Frames', 'Frame type'])
 
 
-parameters << ParameterStruct.new('Material',   'Материал', ['MTB', 'Frame and framesets', 'Frames'])
+parameters << ParameterStruct.new('Material',   'Материал', 'ListValue', ['MTB', 'Frame and framesets', 'Frames'])
 list_values << ListValueStruct.new('Aluminium', 'Алюминий', ['MTB', 'Frame and framesets', 'Frames', 'Material'])
 list_values << ListValueStruct.new('Steel',     'Сталь',    ['MTB', 'Frame and framesets', 'Frames', 'Material'])
 list_values << ListValueStruct.new('Carbon',    'Карбон',   ['MTB', 'Frame and framesets', 'Frames', 'Material'])

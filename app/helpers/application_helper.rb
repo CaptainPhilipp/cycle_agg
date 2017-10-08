@@ -8,19 +8,13 @@ module ApplicationHelper
     link_to titled.ru_title, category_path(group, category)
   end
 
-  def sport_groups
-    @sport_groups
-  end
-
-  def sections_menu_view
+  def show_sections_for(*parents)
     @sections_menu_view ||= MenuView.new(@indexed_sections, @indexed_relations)
+    @sections_menu_view.for_parents(*parents)
   end
 
-  def subsections_menu_view
+  def show_subshow_sections_for(*parents)
     @subsections_menu_view ||= MenuView.new(@indexed_subsections, @indexed_relations)
-  end
-
-  def values_menu_view
-    @parameters_menu_view ||= MenuView.new(@indexed_values, @indexed_relations)
+    @subsections_menu_view.for_parents(*parents)
   end
 end

@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20_171_008_000_030) do
   create_table 'parameters', force: :cascade do |t|
     t.string 'ru_title'
     t.string 'en_title'
-    t.string 'values_type'
+    t.string 'values_type', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.string 'present_type'

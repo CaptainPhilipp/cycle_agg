@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class PublicationsController < ApplicationController
+  include PublicationsHelper
+
+  before_action :load_parameters
+
   def index
     @publications = Publication.all
-    @parameters = Parameter.where_parents(parent_ids_by_class)
   end
 
   def show
@@ -17,6 +20,11 @@ class PublicationsController < ApplicationController
       parent_ids[:SportGroup] = [params[:sport_group].to_i] if params[:sport_group]
       parent_ids[:Category]   = [params[:category].to_i]    if params[:category]
     end
+  end
+
+  def load_parameters
+    @parameters = Parameter.where_parents(parent_ids_by_class)
+    @indexed_list_values = IndexedCollection.new ListValue.where_parents(parent_ids_by_class)
   end
 
   def relations_types
