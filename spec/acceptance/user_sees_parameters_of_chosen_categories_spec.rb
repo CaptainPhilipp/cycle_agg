@@ -3,7 +3,7 @@ require_relative 'acceptance_helper'
 feature 'User sees categories menu' do
   include_context 'seed categories'
   let(:seed_parameter_structs) do
-    [ParameterStruct.new('Diameter', 'Диаметр', %w[MTB Guard Rockrings])]
+    [ParameterStruct.new('Diameter', 'Диаметр', 'ListValue', %w[MTB Guard Rockrings])]
   end
 
   let!(:seed_parameters) do
