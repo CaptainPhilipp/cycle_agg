@@ -27,6 +27,7 @@ class PublicationsController < ApplicationController
     @indexed_list_values = IndexedCollection.new ListValue.where_parents(parent_ids_by_class)
   end
 
+  # hook for private ApplicationController#load_relations
   def relations_types
     { parent_type: %w[SportGroup Category Parameter], children_type: %w[Category ListValue] }
   end
