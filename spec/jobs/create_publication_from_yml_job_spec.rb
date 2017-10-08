@@ -1,5 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe CreatePublicationFromYmlJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.fdescribe CreatePublicationFromYmlJob, type: :job do
+  include_context 'yandex_ml_example'
+
+  describe '#perform' do
+    let(:perform_now) { CreatePublicationFromYmlJob.perform_now(yandex_ml_example_path) }
+
+    it 'creates Publication`s' do
+      expect(perform_now).to match_array Publication.all
+    end
+  end
 end
