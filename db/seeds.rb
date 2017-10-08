@@ -102,13 +102,24 @@ categories = [
   Subsection.new(2, 'Derailer guards', 'Защита переключателя', %w[MTB Guard])
 ]
 
-parameters = [
-  ParameterStruct.new('Frame type', 'Тип рамы', ['MTB', 'Frame and framesets', 'Frames']),
-  ParameterStruct.new('Material',   'Материал', ['MTB', 'Frame and framesets', 'Frames'])
-]
+parameters = []
+list_values = []
+
+parameters << ParameterStruct.new('Frame type',       'Тип рамы',   ['MTB', 'Frame and framesets', 'Frames'])
+list_values << ListValueStruct.new('Hardtail',        'Хардтейл',   ['MTB', 'Frame and framesets', 'Frames', 'Frame type'])
+list_values << ListValueStruct.new('Full suspension', 'Двухподвес', ['MTB', 'Frame and framesets', 'Frames', 'Frame type'])
+
+
+parameters << ParameterStruct.new('Material',   'Материал', ['MTB', 'Frame and framesets', 'Frames'])
+list_values << ListValueStruct.new('Aluminium', 'Алюминий', ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+list_values << ListValueStruct.new('Steel',     'Сталь',    ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+list_values << ListValueStruct.new('Carbon',    'Карбон',   ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+list_values << ListValueStruct.new('Titanium',  'Титан',    ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+
 
 Seed.call do |seed|
   seed.write(SportGroup, groups)
   seed.write(Category, categories)
   seed.write(Parameter, parameters)
+  seed.write(ListValue, list_values)
 end

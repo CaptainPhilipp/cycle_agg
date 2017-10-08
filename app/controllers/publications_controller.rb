@@ -20,6 +20,6 @@ class PublicationsController < ApplicationController
   end
 
   def relations_types
-    { parent_type: %w[SportGroup Category Parameter], children_type: %w[Category Value] }
+    { parent_type: %w[SportGroup Category Parameter], children_type: %w[Category ListValue] }
   end
 end
