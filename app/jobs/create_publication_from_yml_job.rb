@@ -4,7 +4,7 @@ class CreatePublicationFromYmlJob < ApplicationJob
   queue_as :default
 
   def perform(filepath)
-    hashes = HashFromYMLService.call(filepath)
+    hashes = HashFromYML.call(filepath)
     Publication.create(hashes)
   end
 end

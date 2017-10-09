@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # functional object, calculates present_type by given data
-class ValuesPresentTypeByType
+class ValuesPresentType
   CHECKBOX = 'checkbox'
   BUTTON   = 'button'
   SLIDER   = 'slider'

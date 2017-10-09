@@ -4,7 +4,7 @@ div.values
   - values = show_values_for(parameter)
 
   - if values.any?
-    - present_type = ValuesPresentTypeByType.(parameter, values, :ru)
+    - present_type = ValuesPresentType.(parameter, values, :ru)
     = render "parameters/#{present_type}", values: values, parameter: parameter
 
   - else
