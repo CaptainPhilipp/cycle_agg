@@ -13,7 +13,7 @@ module ApplicationHelper
     @sections_view.for_parents(*parents)
   end
 
-  def show_subshow_sections_for(*parents)
+  def show_subsections_for(*parents)
     @subsections_view ||= ChildrensView.new(@indexed_subsections, @indexed_relations)
     @subsections_view.for_parents(*parents)
   end

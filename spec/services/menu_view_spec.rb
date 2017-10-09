@@ -6,7 +6,7 @@ RSpec.describe 'ChildrensView' do
   let(:indexed_relations) { IndexedCollection.new(ChildrenParent.all) }
   let(:view) { ChildrensView.new indexed_categories, indexed_relations }
 
-  describe '#for_parents(parents)' do
+  describe '#for_parents(one_parent)' do
     let(:indexed_categories) { IndexedCollection.new(Category.sections) }
     it 'shows right sections of group' do
       expect(view.for_parents(group_mtb)).to match_array group_mtb_sections
@@ -14,7 +14,7 @@ RSpec.describe 'ChildrensView' do
     end
   end
 
-  describe '#show_subshow_sections_for(parents)' do
+  describe '#for_parents(*many_parents)' do
     let(:indexed_categories) { IndexedCollection.new(Category.all) }
     it 'shows all subsections of parents' do
       expect(view.for_parents(group_mtb, section_frameset))

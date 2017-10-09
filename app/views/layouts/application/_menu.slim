@@ -10,6 +10,6 @@ ul#menu
             li
               = menu_link_for(group, section)
               ul
-                - show_subshow_sections_for(group, section).each do |subsection|
+                - show_subsections_for(group, section).each do |subsection|
                   li
                     = menu_link_for(group, section, subsection)
