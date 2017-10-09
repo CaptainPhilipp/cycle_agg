@@ -7,7 +7,7 @@ RSpec.describe Pricelist, type: :model do
     it 'initializes Publications creation' do
       pricelist = Pricelist.new
       pricelist.attachment = File.new(filepath)
-      expected_hashes = HashFromYMLService.call(filepath)
+      expected_hashes = HashFromYML.call(filepath)
 
       expect(Publication).to receive(:create).with(expected_hashes)
 

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'MenuView' do
+RSpec.describe 'ChildrensView' do
   include_context 'seed categories'
 
   let(:indexed_relations) { IndexedCollection.new(ChildrenParent.all) }
-  let(:view) { MenuView.new indexed_categories, indexed_relations }
+  let(:view) { ChildrensView.new indexed_categories, indexed_relations }
 
   describe '#for_parents(parents)' do
     let(:indexed_categories) { IndexedCollection.new(Category.sections) }

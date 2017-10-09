@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.fdescribe CreatePublicationFromYmlJob, type: :job do
+RSpec.describe CreatePublicationFromYmlJob, type: :job do
   include_context 'yandex_ml_example'
 
   describe '#perform' do
