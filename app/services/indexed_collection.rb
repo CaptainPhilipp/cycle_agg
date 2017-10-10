@@ -19,7 +19,7 @@ class IndexedCollection < Delegator
     if conditions.size > 1
       find_by_multiple_conditions(conditions) || []
     else
-      find_by_one_condition(conditions.first) || []
+      find_by_one_condition(*conditions.first) || []
     end
   end
 
@@ -27,8 +27,8 @@ class IndexedCollection < Delegator
   # Only one key, but any count of values
   def by_key(conditions)
     raise ArgumentError, 'Only one "key => value" argument required!' if conditions.size > 1
-    key, value = conditions.first
-    indexed_by_one(key).values_at(*value).compact.map(&:first)
+    key, values = conditions.first
+    indexed_by_one(key).values_at(*values).compact.map(&:first)
   end
 
   private
