@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Presents categories in right structure, with relations. Optimized.
-class ChildrensView
+class ChildsOfParents
   def initialize(indexed_childrens, indexed_relations)
     @indexed_childrens = indexed_childrens
     @indexed_relations = indexed_relations
