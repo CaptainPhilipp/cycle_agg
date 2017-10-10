@@ -5,9 +5,9 @@ module PublicationsHelper
     menu_view =
       case parameter.values_type
       when 'ListValue'
-        @list_values_view  ||= ChildrensView.new(@indexed_list_values, @indexed_relations)
+        @list_values_view  ||= ChildsOfParents.new(@indexed_list_values, @indexed_relations)
       when 'RangeValue'
-        @range_values_view ||= ChildrensView.new(@indexed_range_values, @indexed_relations)
+        @range_values_view ||= ChildsOfParents.new(@indexed_range_values, @indexed_relations)
       end
 
     menu_view.for_parents(parameter)
