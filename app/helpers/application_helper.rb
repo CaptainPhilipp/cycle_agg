@@ -9,12 +9,12 @@ module ApplicationHelper
   end
 
   def show_sections_for(*parents)
-    @sections_view ||= ChildsOfParents.new(@indexed_sections, @indexed_relations)
-    @sections_view.for_parents(*parents)
+    @sections_by_parents ||= ChildsOfParents.new(@indexed_sections, @indexed_relations)
+    @sections_by_parents.for_parents(*parents)
   end
 
   def show_subsections_for(*parents)
-    @subsections_view ||= ChildsOfParents.new(@indexed_subsections, @indexed_relations)
-    @subsections_view.for_parents(*parents)
+    @subsections_by_parents ||= ChildsOfParents.new(@indexed_subsections, @indexed_relations)
+    @subsections_by_parents.for_parents(*parents)
   end
 end

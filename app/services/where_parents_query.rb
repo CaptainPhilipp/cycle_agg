@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # AR query, that returns childs, having all (not any) of concrete parents
+# Can be explained as:
+# Children.where(id: parent1.children_ids & parent2.children_ids & parentN.children_ids)
 class WhereParentsQuery
   def initialize(klass)
     @childs_class = klass
@@ -12,10 +14,9 @@ class WhereParentsQuery
     @parents = parents
     return childs_class.none if parents.empty?
 
-    if parents.is_a? Hash
-      build_query(subqueries_by_hash, parents_count_in_hash)
-    elsif parents.is_a? Array
-      build_query(subqueries_by_records, parents.size)
+    case parents
+    when Hash  then build_query(subqueries_by_hash, parents_count_in_hash)
+    when Array then build_query(subqueries_by_records, parents.size)
     end
   ensure
     @parents = nil
@@ -58,8 +59,6 @@ class WhereParentsQuery
   end
 
   def query_for(conditions_hash)
-    childs_class
-      .joins(:parent_associations)
-      .where(children_parents: conditions_hash)
+    childs_class.joins(:parent_associations).where(children_parents: conditions_hash)
   end
 end

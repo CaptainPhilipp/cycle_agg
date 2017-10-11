@@ -17,9 +17,9 @@ class IndexedCollection < Delegator
   # Only one value for every key - in other case, you will receive empty result
   def by_keys(conditions)
     if conditions.size > 1
-      find_by_multiple_conditions(conditions) || []
+      find_by_multiple_keys(conditions) || []
     else
-      find_by_one_condition(*conditions.first) || []
+      find_by_one_key(*conditions.first) || []
     end
   end
 
@@ -27,30 +27,32 @@ class IndexedCollection < Delegator
   # Only one key, but any count of values
   def by_key(conditions)
     raise ArgumentError, 'Only one "key => value" argument required!' if conditions.size > 1
-    key, values = conditions.first
-    indexed_by_one(key).values_at(*values).compact.map(&:first)
+    find_by_one_key_many_values(*conditions.first)
   end
 
   private
 
   attr_reader :indexed_collections
 
-  def find_by_multiple_conditions(conditions)
+  def find_by_multiple_keys(conditions)
     keys, values = conditions.to_a.sort_by(&:first).transpose
     indexed_by_multiple_keys(keys)[values]
   end
 
-  def find_by_one_condition(key, value)
-    indexed_by_one(key)[value]
+  def find_by_one_key(key, value)
+    indexed_by_one_key(key)[value]
+  end
+
+  def find_by_one_key_many_values(key, values)
+    indexed_by_one_key(key).values_at(*values).compact.map(&:first)
   end
 
   def indexed_by_multiple_keys(keys)
-    indexed_collections[keys] ||= collection.group_by do |object|
-      keys.map { |key| object.send key }
-    end
+    indexed_collections[keys] ||=
+      collection.group_by { |object| keys.map { |key| object.send key } }
   end
 
-  def indexed_by_one(key)
+  def indexed_by_one_key(key)
     indexed_collections[key] ||= collection.group_by(&key)
   end
 end
