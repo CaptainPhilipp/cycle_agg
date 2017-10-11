@@ -26,7 +26,7 @@ describe WhereParentsQuery do
       add_parents_to children3, parent1, alien_parent
     end
 
-    context 'with array of records' do
+    context 'with hash' do
       it 'children have chosen parents' do
         expect(where_parents.call(Category: [parent1.id]))
           .to match_array [children1, children2, children3]
@@ -44,7 +44,7 @@ describe WhereParentsQuery do
       end
     end
 
-    context 'with hash' do
+    context 'with array of records' do
       it 'children have chosen parents' do
         expect(where_parents.call([parent1])).to match_array [children1, children2, children3]
 
