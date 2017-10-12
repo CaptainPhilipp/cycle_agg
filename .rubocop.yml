@@ -31,3 +31,4 @@ Metrics/LineLength:
 Style/Documentation:
   Include:
     - 'app/services/**/*'
+    - 'app/parsers/**/*'

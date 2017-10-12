@@ -4,11 +4,12 @@ module ForVocabulary
   extend ActiveSupport::Concern
 
   included do
+    has_many :synonyms, as: :owner
     scope :for_vocabulary, -> { includes(:synonym, :parent_associations) }
   end
 
   def all_words
-    [en_title, ru_title] + synonims.map(:value)
+    ([en_title, ru_title] + synonyms.map(&:value)).compact
   end
 
   def type

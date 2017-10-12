@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class Synonym < ApplicationRecord
-  belongs_to :owner
+  belongs_to :owner, polymorphic: true
 end
