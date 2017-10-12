@@ -1,7 +1,7 @@
 require_relative 'acceptance_helper'
 
 feature 'User sees parameters of chosen categories' do
-  include_context 'seed categories'
+  include_context 'seed parameters'
 
   let(:seed_parameter_structs) do
     [ParameterStruct.new('Diameter', 'Диаметр', 'ListValue', %w[MTB Guard Rockrings])]
