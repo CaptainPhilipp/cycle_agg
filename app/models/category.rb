@@ -3,6 +3,7 @@
 class Category < ApplicationRecord
   include HasShortTitle
   include HasManyParentsPolymorphic
+  include ForVocabulary
 
   scope :sections,    -> { where(depth: 1) }
   scope :subsections, -> { where(depth: 2) }

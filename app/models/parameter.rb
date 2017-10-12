@@ -2,6 +2,7 @@
 
 class Parameter < ApplicationRecord
   include HasManyParentsPolymorphic
+  include ForVocabulary
 
   def self.where_parents(parents)
     WhereParentsQuery.new(self).call(parents)

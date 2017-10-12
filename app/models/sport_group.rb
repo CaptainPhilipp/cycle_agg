@@ -2,4 +2,5 @@
 
 class SportGroup < ApplicationRecord
   include HasShortTitle
+  include ForVocabulary
 end
