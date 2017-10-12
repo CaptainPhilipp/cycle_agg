@@ -5,7 +5,7 @@ module ForVocabulary
 
   included do
     has_many :synonyms, as: :owner
-    scope :for_vocabulary, -> { includes(:synonym, :parent_associations) }
+    scope :for_vocabulary, -> { includes(:synonyms, :parent_associations) }
   end
 
   def all_words
