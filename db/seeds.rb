@@ -1,15 +1,18 @@
-require_relative '../app/seeds/seed_service'
+# frozen_string_literal: true
+
+require_relative '../app/seeds/seed'
 
 # rubocop:disable Layout/EmptyLines, Metrics/LineLength
 # rubocop:disable Layout/SpaceInsideArrayPercentLiteral, Layout/SpaceInsidePercentLiteralDelimiters
 
+groups = [
+  Group.new('MTB',  'МТБ'),
+  Group.new('ROAD', 'Шоссе'),
+  Group.new('BMX',  'BMX'),
+  Group.new('FUN',  'Прогулочные')
+]
+
 categories = [
-  Group.new(0, 'MTB',  'МТБ'),
-  Group.new(0, 'ROAD', 'Шоссе'),
-  Group.new(0, 'BMX',  'BMX'),
-  Group.new(0, 'FUN',  'Прогулочные'),
-
-
   Section.new(1,    'Frame and framesets', 'Рамы и фреймсеты',          %w[MTB ROAD BMX FUN]),
 
   Subsection.new(2, 'Framesets',           'Фреймсет',                  %w[MTB ROAD BMX FUN] << 'Frame and framesets'),
@@ -99,4 +102,24 @@ categories = [
   Subsection.new(2, 'Derailer guards', 'Защита переключателя', %w[MTB Guard])
 ]
 
-SeedService.new.call(categories)
+parameters = []
+list_values = []
+
+parameters << ParameterStruct.new('Frame type',       'Тип рамы',   'ListValue', ['MTB', 'Frame and framesets', 'Frames'])
+list_values << ListValueStruct.new('Hardtail',        'Хардтейл',   ['MTB', 'Frame and framesets', 'Frames', 'Frame type'])
+list_values << ListValueStruct.new('Full suspension', 'Двухподвес', ['MTB', 'Frame and framesets', 'Frames', 'Frame type'])
+
+
+parameters << ParameterStruct.new('Material',   'Материал', 'ListValue', ['MTB', 'Frame and framesets', 'Frames'])
+list_values << ListValueStruct.new('Aluminium', 'Алюминий', ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+list_values << ListValueStruct.new('Steel',     'Сталь',    ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+list_values << ListValueStruct.new('Carbon',    'Карбон',   ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+list_values << ListValueStruct.new('Titanium',  'Титан',    ['MTB', 'Frame and framesets', 'Frames', 'Material'])
+
+
+Seed.call do |seed|
+  seed.write(SportGroup, groups)
+  seed.write(Category, categories)
+  seed.write(Parameter, parameters)
+  seed.write(ListValue, list_values)
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_170_930_135_046) do
+ActiveRecord::Schema.define(version: 20_171_008_000_030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -32,6 +32,22 @@ ActiveRecord::Schema.define(version: 20_170_930_135_046) do
     t.datetime 'updated_at', null: false
     t.index %w[children_type children_id], name: 'index_children_parents_on_children_type_and_children_id'
     t.index %w[parent_type parent_id], name: 'index_children_parents_on_parent_type_and_parent_id'
+  end
+
+  create_table 'list_values', force: :cascade do |t|
+    t.string 'ru_title'
+    t.string 'en_title'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
+  create_table 'parameters', force: :cascade do |t|
+    t.string 'ru_title'
+    t.string 'en_title'
+    t.string 'values_type', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'present_type'
   end
 
   create_table 'pricelists', force: :cascade do |t|

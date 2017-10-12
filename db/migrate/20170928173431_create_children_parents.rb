@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateChildrenParents < ActiveRecord::Migration[5.1]
   def change
     create_table :children_parents do |t|

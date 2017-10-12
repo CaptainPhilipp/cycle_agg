@@ -1,0 +1,10 @@
+div.checkboxes
+  - values.each do |value|
+    .checkbox
+      label
+        = check_box_tag :value, value.id, checked?(parameter, value), name: values_name(parameter)
+        = value.ru_title
+  .checkbox
+    label.not_specified
+      = check_box_tag :not_specified, '', checked?(parameter), name:values_name(parameter)
+      = 'Не указано'

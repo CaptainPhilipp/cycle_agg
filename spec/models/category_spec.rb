@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
   include_context 'seed categories'
-  include_context 'HasManyChildsPolymorphic'
+  include_context 'has localizeable title'
+  include_context 'HasManyParentsPolymorphic'
   include_context 'HasShortTitle'
 
   context 'scope' do

@@ -90,6 +90,7 @@ $menu-border: 1px solid #eee;
       .checkbox {
         padding-left: 15px;
       }
+
       .checkbox, .radio {
         margin-top: 0;
         margin-bottom: 0;
@@ -97,8 +98,17 @@ $menu-border: 1px solid #eee;
 
       label {
         font-weight: 200;
-        margin: 5px 0;
+        margin: 2px 0;
       }
+
+      .not_specified {
+        color: #9b9b9b;
+      }
+    }
+
+    .btn-sm {
+      padding: 5px 1px;
+      text-align: center;
     }
 
     .btn-default {
