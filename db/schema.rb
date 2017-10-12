@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_171_008_000_030) do
+ActiveRecord::Schema.define(version: 20_171_012_191_235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -76,5 +76,14 @@ ActiveRecord::Schema.define(version: 20_171_008_000_030) do
     t.string 'short_title'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+  end
+
+  create_table 'synonyms', force: :cascade do |t|
+    t.string 'value'
+    t.string 'owner_type', null: false
+    t.bigint 'owner_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[owner_type owner_id], name: 'index_synonyms_on_owner_type_and_owner_id'
   end
 end
