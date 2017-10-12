@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# choose present_type by values_type and values length
+# functional object, calculates present_type by given data
 class ValuesPresentType
   CHECKBOX = 'checkbox'
   BUTTON   = 'button'
@@ -14,7 +14,7 @@ class ValuesPresentType
   end
 
   def call
-    parameter.present_type || calculate_present_type
+    parameter.present_type ||= calculate_present_type
   end
 
   def self.call(*args)
