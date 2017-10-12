@@ -2,20 +2,20 @@
 
 module PublicationsHelper
   def show_values_for(parameter)
-    menu_view =
+    show_values =
       case parameter.values_type
-      when 'ListValue'  then show_list_values_for
-      when 'RangeValue' then show_range_values_for
+      when 'ListValue'  then show_list_values
+      when 'RangeValue' then show_range_values
       end
 
-    menu_view.for_parents(parameter)
+    show_values.for_parents(parameter)
   end
 
-  def show_list_values_for
+  def show_list_values
     @list_values_by_parents ||= ChildsOfParents.new(@indexed_list_values, @indexed_relations)
   end
 
-  def show_range_values_for
+  def show_range_values
     @range_values_by_parents ||= ChildsOfParents.new(@indexed_range_values, @indexed_relations)
   end
 
