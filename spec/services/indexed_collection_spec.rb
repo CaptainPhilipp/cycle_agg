@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'IndexedCollection' do
+RSpec.describe IndexedCollection do
   include_context 'seed categories'
 
   let(:indexed_categories) { IndexedCollection.new(Category.all) }

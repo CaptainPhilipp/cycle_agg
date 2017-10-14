@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-fdescribe CategoriesFromString do
+describe CategoriesInString do
   include_context 'seed synonyms'
 
   let(:string_with_category) { 'вилка Rockshox Sector 34' }

@@ -1,13 +1,14 @@
 require 'rails_helper'
 
-describe 'Vocabulary' do
+describe Vocabulary do
   include_context 'seed synonyms'
 
   let(:vocabulary) { Vocabulary.new }
 
   let(:collection) { Category.all.to_a + Parameter.all.to_a + ListValue.all.to_a }
   let(:titles) do
-    (collection.map(&:ru_title) + collection.map(&:en_title) + Synonym.pluck(:value).to_a).uniq
+    (collection.map(&:ru_title) + collection.map(&:en_title) + Synonym.pluck(:value).to_a)
+      .uniq.map(&:downcase)
   end
 
   let(:filled_vocabulary) { vocabulary.fill(collection) }

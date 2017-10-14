@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-# At first, tries to find category title in given string, and returns category.
-# If not found, finds categories of terms, listed in title
-# and returns common category of listed terms
-class CategoriesFromString
+# counts categories mentions in string
+class CategoriesInString
   MAX_PHRASE_LENGTH = 3
   SPLIT_PATTERN = /[\s]+/
 
@@ -48,7 +46,7 @@ class CategoriesFromString
   def each_phrase
     phrase_sizes.each do |size|
       string.downcase.split(SPLIT_PATTERN).each_cons(size) do |phrase_arr|
-        yield phrase_arr.compact.join(' ').chomp
+        yield phrase_arr.join(' ')
       end
     end
   end

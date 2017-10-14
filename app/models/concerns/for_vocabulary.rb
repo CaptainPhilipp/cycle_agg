@@ -18,4 +18,8 @@ module ForVocabulary
   def type
     self.class.to_s
   end
+
+  def parent_categories
+    is_a?(Category) ? [self] : super
+  end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'ChildsOfParents' do
+RSpec.describe ChildsOfParents do
   include_context 'seed categories'
 
   let(:indexed_relations) { IndexedCollection.new(ChildrenParent.all) }
