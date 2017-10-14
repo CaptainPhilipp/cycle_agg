@@ -5,6 +5,9 @@ module ForVocabulary
 
   included do
     has_many :synonyms, as: :owner
+    has_many :parent_categories, through: :parent_associations,
+                                 source: :parent,
+                                 source_type: 'Category'
     scope :for_vocabulary, -> { includes(:synonyms, :parent_associations) }
   end
 

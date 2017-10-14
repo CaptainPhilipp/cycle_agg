@@ -9,10 +9,10 @@ RSpec.shared_context 'seed synonyms' do
 
   let(:seed_synonyms_structs) do
     [
-      SynonymStruct.new('Пружина',   find_by('Dampher', Parameter)),
-      SynonymStruct.new('Воздух',    find_by('Air', ListValue)),
-      SynonymStruct.new('Воздушная', find_by('Air', ListValue)),
-      SynonymStruct.new('Вилка',     find_by('Forks', Category))
+      SynonymStruct.new('пружина',   find_by('Dampher', Parameter)),
+      SynonymStruct.new('воздух',    find_by('Air',     ListValue)),
+      SynonymStruct.new('воздушная', find_by('Air',     ListValue)),
+      SynonymStruct.new('вилка',     find_by('Forks',   Category))
     ]
   end
 

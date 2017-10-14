@@ -7,4 +7,8 @@ class Category < ApplicationRecord
 
   scope :sections,    -> { where(depth: 1) }
   scope :subsections, -> { where(depth: 2) }
+
+  def parent_categories
+    [self]
+  end
 end

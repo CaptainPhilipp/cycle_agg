@@ -15,7 +15,7 @@ class Vocabulary < Delegator
   end
 
   def [](phrase)
-    vocabulary[phrase]
+    vocabulary[phrase.downcase]
   end
 
   def fill(terms)
@@ -25,6 +25,7 @@ class Vocabulary < Delegator
 
   def add(term)
     phrases_of(term).each do |phrase|
+      phrase = phrase.downcase
       vocabulary[phrase] ||= []
       vocabulary[phrase] << term
     end
