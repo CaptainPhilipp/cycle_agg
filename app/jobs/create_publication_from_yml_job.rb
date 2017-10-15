@@ -4,7 +4,10 @@ class CreatePublicationFromYmlJob < ApplicationJob
   queue_as :default
 
   def perform(filepath)
-    service = HashFromYML.call(filepath)
-    Publication.create(service.offers)
+    parser = YandexMl::Parser.new(filepath)
+    hashes = YandexMl::OffersHashes.call(parser.yml)
+    Publication.create(hashes)
+  ensure
+    parser.close
   end
 end
