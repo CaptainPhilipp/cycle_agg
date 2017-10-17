@@ -23,9 +23,7 @@ class ChildsOfParents
 
   def common_child_ids_of(parents)
     return child_ids(parents.first) if parents.size == 1
-
-    start_ids = child_ids(parents.shift)
-    parents.inject(start_ids) { |ids, parent| ids & child_ids(parent) }
+    parents.map { |parent| child_ids(parent) }.inject { |ids, parent| ids & parent }
   end
 
   def child_ids(parent)
