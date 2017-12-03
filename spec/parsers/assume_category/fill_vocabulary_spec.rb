@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe BuildVocabulary do
+describe FillVocabulary do
   include_context 'seed synonyms'
 
   let(:collection) { Category.subsections.to_a + Parameter.all.to_a + ListValue.all.to_a }

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe Vocabulary do
+describe Entity::Vocabulary do
   include_context 'seed synonyms'
 
-  let(:vocabulary) { Vocabulary.new }
+  let(:vocabulary) { Entity::Vocabulary.new }
 
   let(:collection) { Category.all.to_a + Parameter.all.to_a + ListValue.all.to_a }
   let(:titles) do
