@@ -32,3 +32,9 @@ Style/Documentation:
   Include:
     - 'app/services/**/*'
     - 'app/parsers/**/*'
+  Exclude:
+    - 'app/parsers/yandex_ml/*'
+
+Style/AsciiComments:
+  Exclude:
+    - '**/*'
