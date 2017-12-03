@@ -40,7 +40,6 @@ gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 
 gem 'carrierwave'
-gem 'yandex_ml'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

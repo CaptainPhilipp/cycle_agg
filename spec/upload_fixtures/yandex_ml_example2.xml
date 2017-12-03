@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="2010-04-01 17:00">
+    <shop>
+        <name>Magazin</name>
+        <company>Magazin</company>
+        <url>http://www.magazin.ru/</url>
+
+        <currencies>
+            <currency id="RUR" rate="1" plus="0"/>
+        </currencies>
+
+        <categories>
+            <category id="1">����������</category>
+            <category id="10" parentId="1">��������</category>
+            <category id="100" parentId="10">�������� ��������</category>
+            <category id="101" parentId="10">�������� ��������</category>
+
+            <category id="2">�����������</category>
+            <category id="11" parentId="2">������������</category>
+            <category id="12" parentId="2">���������</category>
+
+            <category id="3">�����</category>
+            <category id="13" parentId="3">���������</category>
+            <category id="14" parentId="3">�������������� ����������</category>
+            <category id="15" parentId="3">������� ����������</category>
+            <category id="16" parentId="3">������� ����������</category>
+
+            <category id="4">������ � �����������</category>
+            <category id="17" parentId="4">������</category>
+            <category id="18" parentId="4">�����������</category>
+
+            <category id="5">�����������</category>
+            <category id="19" parentId="5">����</category>
+            <category id="20" parentId="5">����������</category>
+
+            <category id="6">������ �� �����������</category>
+        </categories>
+
+        <local_delivery_cost>300</local_delivery_cost>
+
+        <offers>
+            <offer id="12341" type="vendor.model" bid="13" cbid="20" available="true">
+                <url>http://magazin.ru/product_page.asp?pid=14344</url>
+                <price>15000</price>
+                <currencyId>RUR</currencyId>
+                <categoryId type="Own">101</categoryId>
+                <picture>http://magazin.ru/img/device14344.jpg</picture>
+                <delivery>true</delivery>
+                <local_delivery_cost>300</local_delivery_cost>
+                <typePrefix>�������</typePrefix>
+                <vendor>�P</vendor>
+                <vendorCode>Q7533A</vendorCode>
+                <model>Color LaserJet 3000</model>
+                <description>A4, 64Mb, 600x600 dpi, USB 2.0, 29���/��� �/� / 15���/��� ��, ����� �� 100� � 250�, ��������� �� 175�/�, �� 60000 ���/����� </description>
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <country_of_origin>������</country_of_origin>
+            </offer>
+
+            <offer id="12342" type="book" bid="17" available="true">
+                <url>http://magazin.ru/product_page.asp?pid=14345</url>
+                <price>100</price>
+                <currencyId>RUR</currencyId>
+                <categoryId type="Own">13</categoryId>
+                <picture>http://magazin.ru/img/book14345.jpg</picture>
+                <delivery>true</delivery>
+                <local_delivery_cost>300</local_delivery_cost>
+                <author>���������� ��������</author>
+                <name>��� �� ���. � 2 �����. ��� 1</name>
+                <publisher>����� - �����</publisher>
+                <series>�. �������� - �������� ���������</series>
+                <year>2009</year>
+                <ISBN>978-5-699-23647-3</ISBN>
+                <volume>2</volume>
+                <part>1</part>
+                <language>rus</language>
+                <binding>70x90/32</binding>
+                <page_extent>288</page_extent>
+                <description>��� ��������� � ������� �������������� ��������� �������. �� � ���! � ����������� ��� ���������: ������� �� �������������� �������������� ����� ��������� ���� ��������� ������� � ��������� �������.</description>
+                <downloadable>false</downloadable>
+            </offer>
+
+            <offer id="12343" type="audiobook" bid="17" available="true">
+                <url>http://magazin.ru/product_page.asp?pid=14346</url>
+                <price>200</price>
+                <currencyId>RUR</currencyId>
+                <categoryId type="Own">14</categoryId>
+                <picture>http://magazin.ru/img/book14346.jpg</picture>
+                <author>�������� �����</author>
+                <name>���n�� � R��������, ��� �j'��� �� '��j��!</name>
+                <publisher>1�-���������, ����</publisher>
+                <year>2009</year>
+                <ISBN>978-5-9677-0757-5</ISBN>
+                <language>ru</language>
+                <performed_by>������� �������</performed_by>
+                <performance_type>��������</performance_type>
+                <storage>CD</storage>
+                <format>mp3</format>
+                <recording_length>45m23s</recording_length>
+                <description>���� ��������� ������ ����������� ������� ��������� � �����������, ����� ���� ��� ���� � ������, ������ ������.</description>
+                <downloadable>true</downloadable>
+            </offer>
+
+            <offer id="12344" type="artist.title" bid="11" available="true">
+                <url>http://magazin.ru/product_page.asp?pid=14347</url>
+                <price>450</price>
+                <currencyId>RUR</currencyId>
+                <categoryId type="Own">17</categoryId>
+                <picture>http://magazin.ru/img/cd14347.jpg</picture>
+                <delivery>true</delivery>
+                <artist>Pink Floyd</artist>
+                <title>Dark Side Of The Moon, Platinum Disc</title>
+                <year>1999</year>
+                <media>CD</media>
+                <description> Dark Side Of The Moon, ����������� ��� �� ��� ���������� ���������� ������, � ��� �����-������� ������ ������, � ���� �� ��� ��� �������� ���������� ��� �������. ��������� �� �������, ��������� Pink Floyd ����� ������� ����� �� ������ �������� ������� � �����, ������� ������-���� �� ����� � ���� ��� �������� ��������������. ����� �� ���������� ����������� ����� ���������� ��� �����������, ������� ������ ����������� � ������� �����������.</description>
+            </offer>
+
+            <offer id="12345" type="artist.title" bid="56" available="true">
+                <url>http://magazin.ru/product_page.asp?pid=14348</url>
+                <price>400</price>
+                <currencyId>RUR</currencyId>
+                <categoryId type="Own">18</categoryId>
+                <picture>http://magazin.ru/img/dvd14348.jpg</picture>
+                <delivery>true</delivery>
+                <title>������� ������</title>
+                <year>1999</year>
+                <media>DVD</media>
+                <starring>���� ������ (Toni Collette), ������ ������� (Rachel Griffiths)</starring>
+                <director>� �� �����</director>
+                <originalName>Muriel's wedding</originalName>
+                <country>���������</country>
+                <description>������ ������ �� ��������������� ������� �������� ���� ������, � � �������� ����� ������� ������������ ������ ������� ����� � ������� � ���������� �����. ����� � ������ � ����������, ������ � ������ ������� �������, ����������� ������� ��������� ������ ������� � ������� ������ ������� �� �������� ��������� ������ ��������...</description>
+            </offer>
+
+            <offer id="12346" type="tour" bid="71" available="true">
+                <url>http://magazin.ru/product_page.asp?pid=14349</url>
+                <price>30000</price>
+                <currencyId>RUR</currencyId>
+                <categoryId type="Own">19</categoryId>
+                <picture>http://magazin.ru/img/travel14349.jpg</picture>
+                <delivery>false</delivery>
+                <local_delivery_cost>300</local_delivery_cost>
+                <worldRegion>������</worldRegion>
+                <country>������</country>
+                <region>�������</region>
+                <days>7</days>
+                <dataTour>01/06/2014</dataTour>
+                <dataTour>08/06/2014</dataTour>
+                <name>Hilton</name>
+                <hotel_stars>5*****</hotel_stars>
+                <room>SNG</room>
+                <meal>ALL</meal>
+                <included>�����������, ��������, ����������, �������, ���������</included>
+                <transport>����</transport>
+                <description>����� � ������.</description>
+            </offer>
+
+            <offer id="12347" type="event-ticket" bid="13" available="true">
+                <url>http://magazin.ru/product_page.asp?pid=14350</url>
+                <price>5000</price>
+                <currencyId>RUR</currencyId>
+                <categoryId type="Own">6</categoryId>
+                <picture>http://magazin.ru/img/tickets14350.jpg</picture>
+                <delivery>true</delivery>
+                <local_delivery_cost>300</local_delivery_cost>
+                <name>������� ������������� � ������������ ��������������� ������� ������. ������� � �������� ��������.</name>
+                <place>���������� ������������� ��� ������</place>
+                <hall plan="http://magazin.ru/img/mmdm_plan.jpg">������� ���</hall>
+                <hall_part>������ �. 1-5</hall_part>
+                <date>2014-12-31T19:00</date>
+                <is_premiere>0</is_premiere>
+                <is_kids>0</is_kids>
+                <description>������� ������� �������������� � ������������� ���������������� �������� ������ ��� ����������� ��������� ���������.</description>
+            </offer>
+        </offers>
+
+    </shop>
+</yml_catalog>
